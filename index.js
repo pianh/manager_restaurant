@@ -20,8 +20,6 @@ async function runServer(){
     process.exit();
   }
   var server = app.listen(8081, async function () {
-      
-
       var port = server.address().port
   
       console.log("Ung dung Node.js dang lang nghe tai dia chi: http://%s:%s", "localhost", port)
