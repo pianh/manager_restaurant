@@ -5,7 +5,7 @@ const { reject } = require("bluebird");
 class HomeController{
     constructor(){}
     async index(req,res){
-        res.json("á");
+        res.send("á");
     }
     async test(req,res){
         let fakedata = new FakeDataVietnamese();

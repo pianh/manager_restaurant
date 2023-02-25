@@ -6,4 +6,5 @@ class MongoDB {
         await mongoose.connect(uri);
     }
 }
+
 module.exports = MongoDB;
