@@ -58,14 +58,26 @@ class HomeController{
         let managersService = new ManagersService();
         let userService = new UserService();
         let managers = await userService.selectAll();
+        let restaurants = await restaurantsService.selectAll();
         let tmps = [];
-        for(let manager of managers){
+        let arr = [];
+        for(let restaurant of restaurants){
+            // Math.floor(Math.random() * 100) + 1;
+            // Math.random*(managers.length-1)
+            let randomIndex = Math.floor((Math.random()*(managers.length-1)));
+            while(arr.indexOf(randomIndex) != -1){
+                randomIndex = Math.floor((Math.random()*(managers.length-1)));
+            }
+            arr.push(randomIndex);
              let tmp = {
-                user: manager,
-                
+                user: managers[randomIndex],
+                restaurant: restaurant,
+                expire_at: new Date(new Date().setDate(new Date().getDate() + Math.floor((Math.random()*(120-30)+30))))
              }
              tmps.push(tmp);
          }
+        await managersService.create(tmps);
+        res.json(tmps)
 
 
 }

@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const ManagerModelSchema = new Schema(
     {
+        restaurant: {
+            type: mongoose.Schema.Types.ObjectId,
+            autopopulate: true, 
+            ref: "restaurants", 
+            required: true}, 
         user: { 
             type: mongoose.Schema.Types.ObjectId,
             autopopulate: true, 
