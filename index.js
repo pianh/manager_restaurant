@@ -33,6 +33,25 @@ app.get('/checkout', (req, res) => {
   res.render('checkout');
 })
 
+app.get('/myaccount', (req, res) => {
+  res.render('myaccount');
+})
+
+app.get('/error404', (req, res) => {
+  res.render('error404');
+})
+
+app.get('/contact', (req, res) => {
+  res.render('contact');
+})
+
+app.get('/single_product', (req, res) => {
+  res.render('single_product');
+})
+
+app.get('/restaurants', (req, res) => {
+  res.render('restaurants');
+})
 
 async function runServer(){
   try {
