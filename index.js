@@ -21,6 +21,18 @@ app.use('/', routes);
 app.get('/amber', (req, res) => {
   res.render('index');
 })
+app.get('/login_register', (req, res) => {
+  res.render('login_register');
+})
+
+app.get('/cart', (req, res) => {
+  res.render('cart');
+})
+
+app.get('/checkout', (req, res) => {
+  res.render('checkout');
+})
+
 
 async function runServer(){
   try {
