@@ -17,11 +17,9 @@ app.use('/js', express.static(__dirname + 'public/js'));
 app.use('/images', express.static(__dirname + 'public/images'));
 app.use('/fonts', express.static(__dirname + 'public/fonts'));
 
-app.use('/admin/css', express.static(__dirname + 'public/admin/css'));
-app.use('/admin/js', express.static(__dirname + 'public/admin/js'));
-app.use('/admin/flags', express.static(__dirname + 'public/admin/flags'));
-app.use('/admin/fonts', express.static(__dirname + 'public/admin/fonts'));
-app.use('/admin/images', express.static(__dirname + 'public/admin/images'));
+
+app.use('admin/assets/', express.static(__dirname + 'public/admin/assets/'));
+
 
 
 app.use('/', routes);
