@@ -1,11 +1,34 @@
-const { RestaurantsService, FoodsService, MainingredientsService, MainingredientDetailsService, TablesService,  TypesOfPartyService, UserService, ManagersService } = require("../services/index.service")
+const { RestaurantsService, FoodsService, MainingredientsService, MainingredientDetailsService, TablesService,  TypesOfPartyService, UserService, ManagersService, CommentsService } = require("../services/index.service")
 const {FakeDataVietnamese} = require("../providers/fakedata");
 const { resolve } = require("path");
 const { reject } = require("bluebird");
 class HomeController{
     constructor(){}
     async index(req,res){
-        res.send("á");
+        let restaurantsService = new RestaurantsService();
+        let restaurantList = await restaurantsService.selectAll();
+        let foodsService = new FoodsService();
+        let foodList = await foodsService.select({restaurant:restaurantList[0]});
+        let commentsService = new CommentsService();
+        let commentsList = await commentsService.selectAll();
+        res.render('index', {
+            restaurantList: restaurantList,
+            foodList: foodList,
+            commentsList: commentsList
+        });
+    }
+    async restaurant(req, res){
+        let id = req.params.id;
+        let restaurantsService = new RestaurantsService();
+        let restaurant = await restaurantsService.selectById(id);
+        let foodsService = new FoodsService();
+        let foodList = await foodsService.select({restaurant:restaurant});
+        res.render('restaurants', {
+            restaurant: restaurant,
+            foodList: foodList
+        });
+
+
     }
     async test(req,res){
         let fakedata = new FakeDataVietnamese();

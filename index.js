@@ -11,21 +11,21 @@ const config = require("./configs/database.config");
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
-app.use(express.static('public'));
-app.use('/css', express.static(__dirname + 'public/css'));
-app.use('/js', express.static(__dirname + 'public/js'));
-app.use('/images', express.static(__dirname + 'public/images'));
-app.use('/fonts', express.static(__dirname + 'public/fonts'));
+app.use(express.static(__dirname + '/public'));
+// app.use('/css', express.static(__dirname + 'public/css'));
+// app.use('/js', express.static(__dirname + 'public/js'));
+// app.use('/images', express.static(__dirname + 'public/images'));
+// app.use('/fonts', express.static(__dirname + 'public/fonts'));
 
 
-app.use('admin/assets/', express.static(__dirname + 'public/admin/assets/'));
+// app.use('/assets', express.static(__dirname + 'public/assets/'));
 
 
 
 app.use('/', routes);
-app.get('/amber', (req, res) => {
-  res.render('index');
-})
+// app.get('/amber', (req, res) => {
+//   res.render('index');
+// })
 app.get('/login_register', (req, res) => {
   res.render('login_register');
 })
