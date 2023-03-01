@@ -26,10 +26,13 @@ app.use('/', routes);
 // app.get('/amber', (req, res) => {
 //   res.render('index');
 // })
-app.get('/login_register', (req, res) => {
-  res.render('login_register');
+app.get('/login', (req, res) => {
+  res.render('login');
 })
 
+app.get('/register', (req, res) => {
+  res.render('register');
+})
 app.get('/cart', (req, res) => {
   res.render('cart');
 })
