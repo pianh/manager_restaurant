@@ -62,6 +62,40 @@ app.get('/restaurants', (req, res) => {
 app.get('/admin', (req, res) => {
   res.render('admin/adminIndex');
 })
+
+app.get('/admin_order', (req, res) => {
+  res.render('admin/order');
+})
+
+app.get('/admin_addFood', (req, res) => {
+  res.render('admin/addFood');
+})
+
+app.get('/admin_customer', (req, res) => {
+  res.render('admin/customerList');
+})
+
+app.get('/admin_ingredientList', (req, res) => {
+  res.render('admin/ingredientList');
+})
+
+app.get('/admin_table', (req, res) => {
+  res.render('admin/tableList');
+})
+
+app.get('/admin_typeOfpartyList', (req, res) => {
+  res.render('admin/typeOfpartyList');
+})
+
+app.get('/admin_food', (req, res) => {
+  res.render('admin/food');
+})
+
+app.get('/admin_reserveTable', (req, res) => {
+  res.render('admin/reserveTable');
+})
+
+
 async function runServer(){
   try {
     await MongoDB.connect(config.uri);
