@@ -30,6 +30,18 @@ class HomeController{
 
 
     }
+    async mainingredientdetails(req, res){
+        let id = req.params.id;
+        let mainingredientdetailsService = new MainingredientDetailsService();
+        let foodsService = new FoodsService();
+        let foodList = await foodsService.select({restaurant:restaurant});
+        res.render('single_product', {
+            foodList: foodList
+        });
+
+    }
+
+
     async test(req,res){
         let fakedata = new FakeDataVietnamese();
         let restaurantsService = new RestaurantsService();

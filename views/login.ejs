@@ -7,41 +7,14 @@
     <link rel="shortcut icon" href="img/logoEco.svg">
     <link rel="stylesheet" href="css/login.css">
     <title>LogIn</title>
-    <script>
-         var text = '{"account":[{"nickname":"QUY KHANG","username":"quykhang831", "password":"Kh@ng831"},{"nickname":"Quý Khang Huỳnh","username":"admin831", "password":"831Kh@ng"}]}';
-
-        const accountList = JSON.parse(text);
-
-        function logInValidation(){
-            var frm = document.forms['loginForm'];
-            var username = frm.fullname.value;
-            var password = frm.psw.value;
-
-            accountList.account.forEach(function(e){
-                    if(username == e.username && password == e.password){
-                        window.localStorage.setItem(username, e.nickname);
-                        if(username=="admin831"){
-                            window.location.href = "admin.html";
-                        }else{
-                            window.location.href = "index.html";
-                        }
-                        alert("You're logged in!");
-                        e.stopPropagation();
-                        return true;
-                }
-            });
-
-            alert("Invalid username/password combination");
-            return false;
-        }
-    </script>
+    
 </head>
 <body>
-    <a href="index.html"><img id="logoEco" src="img/LogoLogin.svg" alt=""></a>
+    <!-- <a href="#"><img id="logoEco" src="images/logo/logo.png" alt=""></a> -->
     <div class="container">
         <form name="loginForm" action="#" method="post" id="login" class="form" enctype="application/x-www-form-urlencoded" onsubmit="return logInValidation()">
-            <h1 class="form-title">LOG IN</h1>
-            <h3 class="form-slogan">Join EcoFarm for our better farm</h3>
+            <h1 class="form-title">ĐĂNG NHẬP</h1>
+            <h3 class="form-slogan">Chào mừng bạn đến nhà hàng Anh Thư</h3>
             <!-- <div class="form-message form-error"></div> -->
             <div class="form-input-group">
                 <label for="fullname" class="form-label">Email</label>
@@ -49,16 +22,16 @@
                 <div class="form-input-error-message"></div>
             </div>
             <div class="form-input-group">
-                <label for="psw" class="form-label">Password</label>
+                <label for="psw" class="form-label">Mật khẩu</label>
                 <input required type="password" id="psw" name="psw" class="form-input" autofocus placeholder="Password">
                 <div class="form-input-error-message"></div>
             </div>
-            <button class="form-button" type="submit">Continue</button>
+            <button class="form-button" type="submit">Tiếp tục</button>
             <p class="form-text">
-                <a href="#" class="form-link">Forgot your password?</a>
+                <a href="#" class="form-link">Bạn quên mật khẩu của bạn?</a>
             </p>
             <p class="form-text">
-                <a href="#" class="form-link" id="linkCreateAccount">Don't have an account? Create account</a>
+                <a href="#" class="form-link" id="linkCreateAccount">Bạn chưa có tài khoản? Tạo tài khoản </a>
             </p>
         </form>
         <form class="form form-hidden" id="createAccount">

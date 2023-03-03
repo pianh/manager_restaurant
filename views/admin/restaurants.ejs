@@ -39,7 +39,7 @@
 				</div>
 			</div>
 			<!--navigation-->
-			<%- include('navigation.ejs') -%>
+			<%- include('navigationAdmin.ejs') -%>
 			<!--end navigation-->
 		</div>
 		<!--end sidebar wrapper -->
@@ -288,7 +288,7 @@
 							<ol class="breadcrumb mb-0 p-0">
 								<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
 								</li>
-								<li class="breadcrumb-item active" aria-current="page">Danh sách khách hàng</li>
+								<li class="breadcrumb-item active" aria-current="page">Danh sách nhà hàng</li>
 							</ol>
 						</nav>
 					</div>
@@ -320,10 +320,13 @@
 								<thead class="table-light">
 									<tr>
 										<th>STT</th>
-										<th>Tên khách hàng</th>
-										<th>Username</th>
-										<th>Email</th>
+										<th>Tên nhà hàng</th>
+										<th>Địa chỉ</th>
 										<th>Số điện thoại</th>
+                                        <th>Ngày hết hạn</th>
+                                        <th>Chi tiết</th>
+										<!-- <th>Ngày nhận</th>
+										<th>View Details</th> -->
 										<th>Actions</th>
 									</tr>
 								</thead>
@@ -340,15 +343,15 @@
 											</div>
 										</td>
 										<td>Anh Thư</td>
-										
+										<td>Kiên Giang</td>
 
 										<!-- <td><div class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Partially shipped</div></td> -->
 
 										<!-- <td><div class="badge rounded-pill text-info bg-light-info p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Confirmed</div></td> -->
 										
 										<td>$485.20</td>
-										<td>thub1908364@student.ctu.edu.vn</td>
-										<td><button type="button" class="btn btn-primary btn-sm radius-30 px-4">0378469470</button></td>
+										<td>June 10, 2020</td>
+										<td><button type="button" class="btn btn-primary btn-sm radius-30 px-4">View Details</button></td>
 										<td>
 											<div class="d-flex order-actions">
 												<a href="javascript:;" class=""><i class='bx bxs-edit'></i></a>

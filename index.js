@@ -99,6 +99,16 @@ app.get('/admin_reserveTable', (req, res) => {
 })
 
 
+app.get('/admin_restaurant', (req, res) => {
+  res.render('admin/restaurants');
+})
+
+
+app.get('/admin_manager', (req, res) => {
+  res.render('admin/manager');
+})
+
+
 async function runServer(){
   try {
     await MongoDB.connect(config.uri);
