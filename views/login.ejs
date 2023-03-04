@@ -12,18 +12,26 @@
 <body>
     <!-- <a href="#"><img id="logoEco" src="images/logo/logo.png" alt=""></a> -->
     <div class="container">
-        <form name="loginForm" action="#" method="post" id="login" class="form" enctype="application/x-www-form-urlencoded" onsubmit="return logInValidation()">
+        <form action="/login" method="post" id="login" class="form">
             <h1 class="form-title">ĐĂNG NHẬP</h1>
-            <h3 class="form-slogan">Chào mừng bạn đến nhà hàng Anh Thư</h3>
+            <% message=typeof message !='undefined' ? message : undefined; %>
+            <% if(message != undefined) { %>
+                
+                <h3 style="color: red" class="form-slogan"><%= message %></h3>
+            <% } else { %>
+                <h3 class="form-slogan">Chào mừng bạn đến nhà hàng Anh Thư</h3>
+             
+            <% } %>
+          
             <!-- <div class="form-message form-error"></div> -->
             <div class="form-input-group">
-                <label for="fullname" class="form-label">Email</label>
-                <input required type="text" id="fullname" name="fullname" class="form-input" autofocus placeholder="Enter your username or email">
+                <label for="username" class="form-label">Tên đăng nhập</label>
+                <input required type="text" id="username" name="username" class="form-input" autofocus placeholder="Vui lòng nhập tên tài khoản">
                 <div class="form-input-error-message"></div>
             </div>
             <div class="form-input-group">
-                <label for="psw" class="form-label">Mật khẩu</label>
-                <input required type="password" id="psw" name="psw" class="form-input" autofocus placeholder="Password">
+                <label for="password" class="form-label">Mật khẩu</label>
+                <input required type="password" id="password" name="password" class="form-input" autofocus placeholder="Vui lòng nhập mật khẩu">
                 <div class="form-input-error-message"></div>
             </div>
             <button class="form-button" type="submit">Tiếp tục</button>
@@ -32,35 +40,6 @@
             </p>
             <p class="form-text">
                 <a href="#" class="form-link" id="linkCreateAccount">Bạn chưa có tài khoản? Tạo tài khoản </a>
-            </p>
-        </form>
-        <form class="form form-hidden" id="createAccount">
-            <h1 class="form-title">SIGN IN</h1>
-            <h3 class="form-slogan">Join EcoFarm for our better farm</h3>
-            <div class="form-message form-error"></div>
-            <div class="form-input-group">
-                <label for="fullname" class="form-label">Username</label>
-                <input required type="text" id="signupUsername" class="form-input" autofocus placeholder="Enter your full name">
-                <div class="form-input-error-message"></div>
-            </div>
-            <div class="form-input-group">
-                <label for="signupEmail" class="form-label">Email</label>
-                <input required type="email" id="signupEmail" class="form-input" autofocus placeholder="Email Address">
-                <div class="form-input-error-message"></div>
-            </div>
-            <div class="form-input-group">
-                <label for="signupPassword" class="form-label">Password</label>
-                <input required type="password" id="signupPassword" class="form-input" autofocus placeholder="Password">
-                <div class="form-input-error-message"></div>
-            </div>
-            <div class="form-input-group">
-                <label for="signupPassword2" class="form-label">Confirmed password</label>
-                <input required type="password" id="signupPassword2" class="form-input" autofocus placeholder="Confirm password">
-                <div class="form-input-error-message"></div>
-            </div>
-            <button class="form-button" type="submit" onclick="window.location.href='login.html'">Continue</button>
-            <p class="form-text">
-                <a href="#" class="form-link" id="linkLogin">Already have an account? Sign in</a>
             </p>
         </form>
     </div>

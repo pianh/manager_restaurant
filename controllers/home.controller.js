@@ -2,6 +2,7 @@ const { RestaurantsService, FoodsService, MainingredientsService, Mainingredient
 const {FakeDataVietnamese} = require("../providers/fakedata");
 const { resolve } = require("path");
 const { reject } = require("bluebird");
+const { response } = require("express");
 class HomeController{
     constructor(){}
     async index(req,res){
@@ -17,6 +18,32 @@ class HomeController{
             commentsList: commentsList
         });
     }
+    //Ham show login
+    async login(req, res){
+        res.render('login')
+    }
+
+    //Ham xu ly
+    async loginHandle(req, res){
+        let userService = new UserService();
+        let user = {
+            username: req.body.username,
+            password: req.body.password
+
+        }
+        let customer = await userService.selectOne(user);
+        if(customer){
+            if(customer.isAdmin){
+                res.redirect('/admin')
+            }else{
+                res.redirect('/')
+            }
+        }else{
+            res.render('login',{message: "Sai tên đăng nhập hoặc mật khẩu. Vui lòng đăng nhập lại!"});    
+        }
+      
+    }
+
     async restaurant(req, res){
         let id = req.params.id;
         let restaurantsService = new RestaurantsService();
@@ -34,8 +61,9 @@ class HomeController{
         let id = req.params.id;
         let mainingredientdetailsService = new MainingredientDetailsService();
         let foodsService = new FoodsService();
-        let foodList = await foodsService.select({restaurant:restaurant});
+        let foodList = await foodsService.select({mainingredientdetails:mainingredientdetails});
         res.render('single_product', {
+            mainingredientdetails: mainingredientdetails,
             foodList: foodList
         });
 

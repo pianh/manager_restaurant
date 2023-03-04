@@ -6,6 +6,9 @@ var app = express();
 const MongoDB = require("./providers/database")
 const routes = require('./routes/index');
 const config = require("./configs/database.config");
+// ddang nhap bang form, submit file
+app.use(express.urlencoded({ limit: "100mb", extended: false }));
+app.use(express.json({ limit: "100mb" }));
 
 // Phuong thuc get() phan hoi mot GET Request ve Homepage
 app.set('views', './views');
@@ -26,9 +29,7 @@ app.use('/', routes);
 // app.get('/amber', (req, res) => {
 //   res.render('index');
 // })
-app.get('/login', (req, res) => {
-  res.render('login');
-})
+
 
 app.get('/register', (req, res) => {
   res.render('register');
@@ -51,7 +52,7 @@ app.get('/error404', (req, res) => {
 app.get('/contact', (req, res) => {
   res.render('contact');
 })
-
+//Trang chi tiết món ăn
 app.get('/single_product', (req, res) => {
   res.render('single_product');
 })

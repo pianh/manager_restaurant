@@ -5,6 +5,11 @@ var home =new HomeController();
 
 router.route("/test").get(home.test);
 router.route("/restaurant/:id").get(home.restaurant);
+
+router.route("/login").get(home.login).post(home.loginHandle);
+ 
+
+
 router.route("/").get(home.index);
 
 module.exports = router;
