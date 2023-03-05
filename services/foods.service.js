@@ -17,6 +17,15 @@ class FoodsService {
             console.log(err);
         }
     }
+    async selectById(foods) {
+        try {
+            const query =  FoodsModel.findById(foods);
+            return await query.exec();
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     async selectAll() {
         try {
             const query =  FoodsModel.find();

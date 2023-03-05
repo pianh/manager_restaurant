@@ -44,6 +44,22 @@ class HomeController{
       
     }
 
+    async register(req, res){
+        res.render('register')
+    }
+
+    async registerHandle(req, res){
+        let userService = new UserService();
+        let user = {
+            name: req.body.name,
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password
+        }
+        let customer = await userService.create(user);
+        res.render('login', {message: "Bạn đã đăng ký thành công!"})
+    }
+
     async restaurant(req, res){
         let id = req.params.id;
         let restaurantsService = new RestaurantsService();
@@ -57,14 +73,16 @@ class HomeController{
 
 
     }
-    async mainingredientdetails(req, res){
+
+    async detailFood(req, res){
         let id = req.params.id;
         let mainingredientdetailsService = new MainingredientDetailsService();
         let foodsService = new FoodsService();
-        let foodList = await foodsService.select({mainingredientdetails:mainingredientdetails});
+        let food = await foodsService.selectById(id);
+        let mainingredientdetails = await mainingredientdetailsService.selectOne({food:food});
         res.render('single_product', {
-            mainingredientdetails: mainingredientdetails,
-            foodList: foodList
+            food: food,
+            mainingredientdetails: mainingredientdetails
         });
 
     }

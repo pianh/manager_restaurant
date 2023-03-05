@@ -6,34 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="img/logoEco.svg">
     <link rel="stylesheet" href="css/login.css">
-    <title>EcoFarm SignIn</title>
+    <title>SignIn</title>
 </head>
 <body>
     <a href="index.html"><img id="logoEco" src="" alt=""></a>
     <div class="container">
         <!-- Form Login -->
-        <form method="post" action="" class="form" id="createAccount">
+        <form method="post" action="/register" class="form" id="createAccount">
             <h1 class="form-title">ĐĂNG KÝ</h1>
             <h3 class="form-slogan">Chào mừng bạn đến nhà hàng Anh Thư</h3>
             <div class="form-message form-error"></div>
             <div class="form-input-group">
-                <label for="fullname" class="form-label">Username</label>
-                <input required type="text" id="signupUsername" class="form-input" autofocus placeholder="Enter your full name">
+                <label for="name" class="form-label" name="username">Tên</label>
+                <input required type="text" name="name" id="signupUsername" class="form-input" autofocus placeholder="Vui lòng nhập tên của bạn">
                 <div class="form-input-error-message"></div>
             </div>
             <div class="form-input-group">
-                <label for="signupEmail" class="form-label">Email</label>
-                <input required type="email" id="signupEmail" class="form-input" autofocus placeholder="Email Address">
+                <label for="name" class="form-label" name="username">Tên tài khoản</label>
+                <input required type="text" name="username" id="signupUsername" class="form-input" autofocus placeholder="Vui lòng nhập tên tài khoản">
+                <div class="form-input-error-message"></div>
+            </div>
+            <div class="form-input-group">
+                <label for="email" class="form-label" name="email">Email</label>
+                <input required type="email" name="email" class="form-input" autofocus placeholder="Vui lòng nhập email của bạn">
                 <div class="form-input-error-message"></div>
             </div>
             <div class="form-input-group">
                 <label for="signupPassword" class="form-label">Mật khẩu</label>
-                <input required type="password" id="signupPassword" class="form-input" autofocus placeholder="Password">
+                <input required type="password" name="password" id="signupPassword" class="form-input" autofocus placeholder="Vui lòng nhập mật khẩu của bạn">
                 <div class="form-input-error-message"></div>
             </div>
             <div class="form-input-group">
                 <label for="signupPassword2" class="form-label">Nhập lại mật khẩu</label>
-                <input required type="password" id="signupPassword2" class="form-input" autofocus placeholder="Confirm password">
+                <input required type="password" name="repassword" class="form-input" autofocus placeholder="Vui lòng nhập lại mật khẩu của bạn">
                 <div class="form-input-error-message"></div>
             </div>
             <button class="form-button" type="submit">Tiếp tục</button>

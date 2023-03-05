@@ -7,8 +7,8 @@ router.route("/test").get(home.test);
 router.route("/restaurant/:id").get(home.restaurant);
 
 router.route("/login").get(home.login).post(home.loginHandle);
- 
-
+router.route("/register").get(home.register).post(home.registerHandle);
+router.route("/food/:id").get(home.detailFood);
 
 router.route("/").get(home.index);
 

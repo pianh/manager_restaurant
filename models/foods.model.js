@@ -13,6 +13,7 @@ const FoodsModelSchema = new Schema(
         image_url: [
             { type: String, trim: true, required: true }
         ],
+        // content:{type: String, trim: true, required: true},
         status: { type: Boolean, default: true },
     },
     { versionKey: false }
