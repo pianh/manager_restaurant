@@ -80,6 +80,7 @@ class HomeController{
         let foodsService = new FoodsService();
         let food = await foodsService.selectById(id);
         let mainingredientdetails = await mainingredientdetailsService.selectOne({food:food});
+        console.log(food)
         res.render('single_product', {
             food: food,
             mainingredientdetails: mainingredientdetails

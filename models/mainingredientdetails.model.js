@@ -9,15 +9,18 @@ const MainingredientDetailsModelSchema = new Schema(
             ref: "foods", 
             required: true },
         mainingredients: {
-            type:[{ 
-                type: mongoose.Schema.Types.ObjectId,
-                autopopulate: true, 
-                ref: "mainingredients"
-            }],
+            type:[{
+                mainingredient:{ 
+                    type: mongoose.Schema.Types.ObjectId,
+                    autopopulate: true, 
+                    ref: "mainingredients"
+                },
+                quantity: { type: Number, trim: true, required: true },
+                unit: { type: String, trim: true, required: true }
+            }    
+        ],
             required: true 
         } ,
-        quantity: { type: Number, trim: true, required: true },
-        unit: { type: String, trim: true, required: true },
     },  
     { versionKey: false }
 );
