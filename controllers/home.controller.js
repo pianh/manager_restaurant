@@ -1,8 +1,10 @@
 const { RestaurantsService, FoodsService, MainingredientsService, MainingredientDetailsService, TablesService,  TypesOfPartyService, UserService, ManagersService, CommentsService } = require("../services/index.service")
 const {FakeDataVietnamese} = require("../providers/fakedata");
+const {CookieProvider} = require("../providers/cookie")
 const { resolve } = require("path");
 const { reject } = require("bluebird");
 const { response } = require("express");
+const cookies = new CookieProvider();
 class HomeController{
     constructor(){}
     async index(req,res){
@@ -21,6 +23,47 @@ class HomeController{
     //Ham show login
     async login(req, res){
         res.render('login')
+
+    }
+
+    async cart(req, res){
+        let a = [];
+        let aString = JSON.stringify(a);
+        cookies.setParamater(req, res);
+        cookies.setCookie("carts", aString, 24);
+        let bString = cookies.getCookie("carts");
+        let b = JSON.parse(bString);
+    }
+
+    async addCart(req, res){
+        cookies.setParamater(req, res);
+        let food = req.body.foodID;
+        let quantity = req.body.quantity;
+        let itemCart = {
+                food: food,
+                quantity: quantity
+        };
+        if(cookies.getCookie("carts")){
+            let bString = cookies.getCookie("carts");
+            let b = JSON.parse("bString");
+            let food = req.body.foodID;
+            let quantity = req.body.quantity;
+            let itemCart = {
+                food: food,
+                quantity: quantity
+            };
+            b.push(itemCart);
+            bString = JSON.stringify(b);
+            cookies.setCookie("carts", bString, 24);
+        }
+        else{
+            let a = [];
+            a.push(itemCart);
+            let aString = JSON.stringify(a);
+            cookies.setCookie("carts", aString, 24);
+        }
+        res.redirect('/cart');
+
     }
 
     //Ham xu ly
@@ -59,7 +102,6 @@ class HomeController{
         let customer = await userService.create(user);
         res.render('login', {message: "Bạn đã đăng ký thành công!"})
     }
-
     async restaurant(req, res){
         let id = req.params.id;
         let restaurantsService = new RestaurantsService();
@@ -80,13 +122,15 @@ class HomeController{
         let foodsService = new FoodsService();
         let food = await foodsService.selectById(id);
         let mainingredientdetails = await mainingredientdetailsService.selectOne({food:food});
-        console.log(food)
+        // console.log(food)
         res.render('single_product', {
             food: food,
             mainingredientdetails: mainingredientdetails
         });
 
     }
+
+
 
 
     async test(req,res){

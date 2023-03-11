@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+const cookieParser = require('cookie-parser');
 
 
 // Say our original entrance script is `app.js`
@@ -9,6 +10,8 @@ const config = require("./configs/database.config");
 // ddang nhap bang form, submit file
 app.use(express.urlencoded({ limit: "100mb", extended: false }));
 app.use(express.json({ limit: "100mb" }));
+app.use(cookieParser());
+
 
 // Phuong thuc get() phan hoi mot GET Request ve Homepage
 app.set('views', './views');
