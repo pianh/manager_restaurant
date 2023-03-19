@@ -2,228 +2,10 @@
 <html lang="en">
 
 <%- include('header.ejs') -%>
-
+<% let totals = 0 %>
 <body>
     <!-- Header Section Start -->
-    <div class="header section">
-        <!-- Header Bottom Start -->
-        <div class="header-bottom">
-            <div class="header-sticky">
-                <div class="container">
-                    <div class="row align-items-center position-relative">
-
-                        <!-- Header Logo Start -->
-                        <div class="col-lg-3 col-md-4 col-6">
-                            <div class="header-logo">
-                                <a href="index.html"><img src="images/logo/logo.png" alt="Site Logo" /></a>
-                            </div>
-                        </div>
-                        <!-- Header Logo End -->
-
-                        <!-- Header Menu Start -->
-                        <div class="col-lg-6 d-none d-lg-block">
-                            <div class="main-menu">
-                                <ul>
-                                    <li class="has-children">
-                                        <a href="index-3.html">Trang chủ</a>
-                                    </li>
-                                    <li class="has-children position-static">
-                                        <a href="#">Nhà hàng</a>
-                                        <ul class="mega-menu">
-                                            <li class="mega-menu-col">
-                                                <ul class="m-b-n10">
-                                                    <li><a href="#">Hệ thống nhà hàng phố 79</a></li>
-                                                    <li><a href="#">Chuỗi Ân Nam Quán</a></li>
-                                                    <li><a href="#">Nhà hàng sườn nướng Hàn Quốc</a></li>
-                                                    <li><a href="#">Chuỗi Lẫu Cua Đất Mũi</a></li>
-                                                    <li><a href="#">Nhà hàng EON 51</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="mega-menu-col">
-                                                <ul class="m-b-n10">
-                                                    <li><a href="#">Nhà hàng Út Cà Mau</a></li>
-                                                    <li><a href="#">Buffet Hoàng Yến</a></li>
-                                                    <li><a href="#">Hàng Dương Quán</a></li>
-                                                    <li><a href="#">Nhà hàng Gạo</a></li>
-                                                    <li><a href="#">Chuỗi King BBQ - Vua nướng Korea</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="mega-menu-col">
-                                                <ul class="m-b-n10">
-                                                    <li><a href="#">Soa soa</a></li>
-                                                    <li><a href="#">Quê nhà</a></li>
-                                                    <li><a href="#">Red Chilli Sea Food</a></li>
-                                                    <li><a href="#">Chuỗi San Fu Lou</a></li>
-                                                    <li><a href="#">Chuỗi Dìn Kí</a></li>
-                                                   
-                                                </ul>
-                                            </li>
-                                            <li class="mega-menu-col">
-                                                <ul class="m-b-n10">
-                                                    <li><a href="#">Soa soa</a></li>
-                                                    <li><a href="#">Quê nhà</a></li>
-                                                    <li><a href="#">Red Chilli Sea Food</a></li>
-                                                    <li><a href="#">Chuỗi San Fu Lou</a></li>
-                                                    <li><a href="#">Chuỗi Dìn Kí</a></li>
-                                                   
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="has-children">
-                                        <a href="#">Giới thiệu</a>
-                                    </li>
-                                    <li class="has-children">
-                                        <a href="#">Liên hệ</a>
-                                    </li>
-                                   
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Header Menu End -->
-
-                        <!-- Header Action Start -->
-                        <div class="col-lg-3 col-md-8 col-6">
-                            <div class="header-actions">
-
-                                <!-- Header Action Search Button Start -->
-                                <div class="header-action-btn header-action-btn-search d-none d-md-flex">
-                                    <div class="action-execute">
-                                        <a class="action-search-open" href="javascript:void(0)"><i class="icon-magnifier icons"></i></a>
-                                        <a class="action-search-close" href="javascript:void(0)"><i class="ti-close"></i></a>
-                                    </div>
-                                    <!-- Search Form and Button Start -->
-                                    <form class="header-search-form" action="#">
-                                        <input type="text" class="header-search-input" placeholder="Search Our Store">
-                                        <button class="header-search-button"><i class="icon-magnifier icons"></i></button>
-                                    </form>
-                                    <!-- Search Form and Button End -->
-                                </div>
-                                <!-- Header Action Search Button End -->
-
-                                <!-- Header My Account Button Start -->
-                                <a href="my-account.html" class="header-action-btn header-action-btn-wishlist">
-                                    <i class="icon-user icons"></i>
-                                </a>
-                                <!-- Header My Account Button End -->
-
-                                <!-- Header Action Button Start -->
-                                <div class="header-action-btn header-action-btn-cart d-none d-sm-flex">
-                                    <a class="cart-visible" href="javascript:void(0)">
-                                        <i class="icon-handbag icons"></i>
-                                        <span class="header-action-num">3</span>
-                                    </a>
-
-                                    <!-- Header Cart Content Start -->
-                                    <div class="header-cart-content">
-
-                                        <!-- Cart Procut Wrapper Start  -->
-                                        <div class="cart-product-wrapper">
-
-                                            <!-- Cart Product/Price Start -->
-                                            <div class="cart-product-inner p-b-20 m-b-20 border-bottom">
-
-                                                <!-- Single Cart Product Start -->
-                                                <div class="single-cart-product">
-                                                    <div class="cart-product-thumb">
-                                                        <a href="single-product.html"><img src="assets/images/header/header-cart/1.png" alt="Cart Product"></a>
-                                                    </div>
-                                                    <div class="cart-product-content">
-                                                        <h3 class="title"><a href="single-product.html">Basic Dog Trainning</a></h3>
-                                                        <div class="product-quty-price">
-                                                            <span class="cart-quantity">Qty: <strong> 1 </strong></span>
-                                                            <span class="price">
-															<span class="new">$70.00</span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Single Cart Product End -->
-
-                                                <!-- Product Remove Start -->
-                                                <div class="cart-product-remove">
-                                                    <a href="#/"><i class="icon-close"></i></a>
-                                                </div>
-                                                <!-- Product Remove End -->
-
-                                            </div>
-                                            <!-- Cart Product/Price End -->
-
-                                            <!-- Cart Product/Price Start -->
-                                            <div class="cart-product-inner p-b-20 m-b-20 border-bottom">
-
-                                                <!-- Single Cart Product Start -->
-                                                <div class="single-cart-product">
-                                                    <div class="cart-product-thumb">
-                                                        <a href="single-product.html"><img src="assets/images/header/header-cart/2.png" alt="Cart Product"></a>
-                                                    </div>
-                                                    <div class="cart-product-content">
-                                                        <h3 class="title"><a href="single-product.html">Wait, You Need This</a></h3>
-                                                        <div class="product-quty-price">
-                                                            <span class="cart-quantity">Qty: <strong> 1 </strong></span>
-                                                            <span class="price">
-															<span class="new">$80.00</span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Single Cart Product End -->
-
-                                                <!-- Product Remove Start -->
-                                                <div class="cart-product-remove">
-                                                    <a href="#/"><i class="icon-close"></i></a>
-                                                </div>
-                                                <!-- Product Remove End -->
-
-                                            </div>
-                                            <!-- Cart Product/Price End -->
-
-                                        </div>
-                                        <!-- Cart Procut Wrapper -->
-
-                                        <!-- Cart Product Total Start -->
-                                        <div class="cart-product-total p-b-20 m-b-20 border-bottom">
-                                            <span class="value">Total</span>
-                                            <span class="price">200$</span>
-                                        </div>
-                                        <!-- Cart Product Total End -->
-
-                                        <!-- Cart Product Button Start -->
-                                        <div class="cart-product-btn m-t-20">
-                                            <a href="cart.html" class="btn btn-outline-light btn-hover-primary w-100">View cart</a>
-                                            <a href="checkout.html" class="btn btn-outline-light btn-hover-primary w-100 m-t-20">Checkout</a>
-                                        </div>
-                                        <!-- Cart Product Button End -->
-
-                                    </div>
-                                    <!-- Header Cart Content End -->
-
-                                </div>
-                                <div class="header-action-btn header-action-btn-cart d-flex d-sm-none">
-                                    <a href="cart.html">
-                                        <i class="icon-handbag icons"></i>
-                                        <span class="header-action-num">3</span>
-                                    </a>
-                                </div>
-                                <!-- Header Action Button End -->
-
-                                <!-- Mobile Menu Hambarger Action Button Start -->
-                                <a href="javascript:void(0)" class="header-action-btn header-action-btn-menu d-lg-none d-md-flex">
-                                    <i class="icon-menu"></i>
-                                </a>
-                                <!-- Mobile Menu Hambarger Action Button End -->
-
-                            </div>
-                        </div>
-                        <!-- Header Action End -->
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Header Bottom End -->
-
-    </div>
+    <%- include('header_section.ejs') -%>
     <!-- Header Section End -->
 
     <!-- Breadcrumb Area Start -->
@@ -278,22 +60,29 @@
                                     <td class="pro-title"><a href="#"><%=element.food.name%></a></td>
                                     <td class="pro-price"><span><%=formatPrice(element.food.price)%></span></td>
                                     <td class="pro-quantity">
-                                        <div class="quantity">
-                                            <form class="cart-plus-minus" method="post" action="/updateToCart">
-                                                <input class="cart-plus-minus-box" value="<%= element.quantity %>" name="quantity" type="text" required>
-                                                
-                                                
+                                        <form class="quantity" method="post" action="/updateToCart">
+                                            <div class="cart-plus-minus">
+                                                <input class="cart-plus-minus-box" value="<%= element.quantity %>" name="quantity" type="text" required>                                                
                                                 <div class="dec qtybutton">-</div>
                                                 <div class="inc qtybutton">+</div>
-                                                <input name = "foodID" value="<%= element.food._id %>" type="text">
                                                 
+                                            </div>
+                                            
+                                            <input name = "foodID" value="<%= element.food._id %>" type="text" hidden>
+                                        </form>
+                                    </td>
+                                    <td class="pro-subtotal"><span><% totals +=  (element.food.price*element.quantity) %><%=formatPrice(element.food.price*element.quantity)%></span></td>
+                                    <td class="pro-remove ">
+                                        <div class="d-flex">
+                                            <button onclick="this.parentElement.parentElement.previousElementSibling.previousElementSibling.firstElementChild.submit()" type="submit" class="btn btn btn-gray-deep btn-hover-primary  p-2">Update</button>
+                                            <form action="/removeFromCart" method="post" class="ms-1">
+                                                <input name = "foodID" value="<%= element.food._id %>" type="text" hidden>
+                                                <button class="btn btn-danger p-2">
+                                                    <i class="ti-trash"></i>
+                                                </button>
                                             </form>
                                         </div>
                                     </td>
-                                    <td class="pro-subtotal"><span><%=formatPrice(element.food.price*element.quantity)%></span></td>
-                                    <td class="pro-remove">
-                                        <button onclick="this.parentElement.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.submit()" type="submit" class="btn btn btn-gray-deep btn-hover-primary">Update</button>
-                                        <a href="#"><i class="ti-trash"></i></a></td>
                                 </tr>
                             <% }) %>
                             </tbody>
@@ -304,7 +93,7 @@
                     <!-- Cart Table End -->
 
                     <!-- Cart Button Start -->
-                    <div class="cart-button-section m-b-n20">
+                    <div class="cart-button-section m-b-n20"> 
 
                         <!-- Cart Button left Side Start -->
                         <div class="cart-btn-lef-side m-b-20">
@@ -315,7 +104,7 @@
 
                         <!-- Cart Button Right Side Start -->
                         <div class="cart-btn-right-right m-b-20">
-                            <a href="#" class="btn btn btn-gray-deep btn-hover-primary">Clear Shopping Cart</a>
+                            <a href="/clearAllProductInCart" class="btn btn btn-gray-deep btn-hover-primary">Clear Shopping Cart</a>
                         </div>
                         <!-- Cart Button Right Side End -->
 
@@ -342,17 +131,10 @@
                             <div class="table-responsive">
                                 <table class="table">
                                     <tr>
-                                        <td>Sub Total</td>
-                                        <td>$230</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Shipping</td>
-                                        <td>$70</td>
-                                    </tr>
-                                    <tr class="total">
                                         <td>Total</td>
-                                        <td class="total-amount">$300</td>
+                                        <td class="pro-subtotal"><span><%=formatPrice(totals)%></span></td>
                                     </tr>
+                                    
                                 </table>
                             </div>
                             <!-- Responsive Table End -->
@@ -375,97 +157,7 @@
     <!-- Shopping Cart Section End -->
 
     <!-- Footer Section Start -->
-    <footer class="section footer-section">
-        <!-- Footer Top Start -->
-        <div class="footer-top bg-name-bright section-padding">
-            <div class="container">
-                <div class="row m-b-n40">
-                    <div class="col-12 col-sm-6 col-lg-3 m-b-40" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="single-footer-widget">
-                            <h1 class="widget-title">About Us</h1>
-                            <p class="desc-content">Lorem ipsum dolor sit amet, co adipisi elit, sed eiusmod tempor incididunt ut labore et dolore</p>
-                            <!-- Soclial Link Start -->
-                            <div class="widget-social justify-content-start m-b-n10">
-                                <a title="Twitter" href="#/"><i class="icon-social-twitter"></i></a>
-                                <a title="Instagram" href="#/"><i class="icon-social-instagram"></i></a>
-                                <a title="Linkedin" href="#/"><i class="icon-social-linkedin"></i></a>
-                                <a title="Skype" href="#/"><i class="icon-social-skype"></i></a>
-                                <a title="Dribble" href="#/"><i class="icon-social-dribbble"></i></a>
-                            </div>
-                            <!-- Social Link End -->
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-lg-3 m-b-40" data-aos="fade-up" data-aos-duration="1200">
-                        <div class="single-footer-widget">
-                            <h2 class="widget-title">Useful Links</h2>
-                            <ul class="widget-list">
-                                <li><a href="wishlist.html">Help & Contact Us</a></li>
-                                <li><a href="contact.html">Returns & Refunds</a></li>
-                                <li><a href="contact.html">Online Stores</a></li>
-                                <li><a href="contact.html">Terms & Conditions</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-lg-3 m-b-40" data-aos="fade-up" data-aos-duration="1400">
-                        <div class="single-footer-widget">
-                            <h2 class="widget-title">Help</h2>
-                            <ul class="widget-list">
-                                <li><a href="wishlist.html">Wishlist</a></li>
-                                <li><a href="contact.html">Pricing Plans</a></li>
-                                <li><a href="contact.html">Order Traking</a></li>
-                                <li><a href="contact.html">Returns</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-lg-3 m-b-40" data-aos="fade-up" data-aos-duration="1600">
-                        <div class="single-footer-widget">
-                            <h2 class="widget-title">Send newsletter</h2>
-                            <div class="widget-body">
-                                <p class="desc-content m-b-20">Subscribe to our newsletter and get 10% off your first purchase..</p>
-                                <!-- Newsletter Form Start -->
-                                <div class="newsletter-form-wrap p-t-5">
-                                    <form id="mc-form" class="mc-form">
-                                        <input type="email" id="mc-email" class="form-control email-box" placeholder="demo@example.com" name="EMAIL">
-                                        <button id="mc-submit" class="newsletter-btn" type="submit">Send</button>
-                                    </form>
-                                    <!-- mailchimp-alerts Start -->
-                                    <div class="mailchimp-alerts text-centre">
-                                        <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-                                        <div class="mailchimp-success text-success"></div><!-- mailchimp-success end -->
-                                        <div class="mailchimp-error text-danger"></div><!-- mailchimp-error end -->
-                                    </div>
-                                    <!-- mailchimp-alerts end -->
-                                </div>
-                                <!-- Newsletter Form End -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer Top End -->
-
-        <!-- Footer Bottom Start -->
-        <div class="footer-bottom bg-name-light p-t-20 p-b-20">
-            <div class="container">
-                <div class="row align-items-center m-b-n20">
-                    <div class="col-md-6 text-center text-md-start order-2 order-md-1 m-b-20">
-                        <div class="copyright-content">
-                            <p class="mb-0">© 2021 <strong>Amber </strong> Made with <i class="fa fa-heart text-danger"></i> by <a href="https://hasthemes.com/">HasThemes.</a></p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 text-center text-md-end order-1 order-md-2 m-b-20">
-                        <div class="payment">
-                            <a href="#/">
-                                <img class="fit-image" src="assets/images/payment/payment_large.png" alt="Payment">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer Bottom End -->
-    </footer>
+    <%- include('footer.ejs') -%>
     <!-- Footer Section End -->
 
     <!-- Modal Start  -->
