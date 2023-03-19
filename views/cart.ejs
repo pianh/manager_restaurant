@@ -270,70 +270,32 @@
 
                             <!-- Table Body Start -->
                             <tbody>
+                                <%carts.forEach(
+                                    (element, index ) => {
+                                %> 
                                 <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img class="fit-image" src="assets/images/products/small-product/6.png" alt="Product" /></a></td>
-                                    <td class="pro-title"><a href="#">Learn About Fish Farming</a></td>
-                                    <td class="pro-price"><span>$95.00</span></td>
+                                    <td class="pro-thumbnail"><a href="#"><img class="fit-image" src="<%=element.food.image_url.lenght > 0 ? element.food.image_url[0] : '' %>" alt="Product" /></a></td>
+                                    <td class="pro-title"><a href="#"><%=element.food.name%></a></td>
+                                    <td class="pro-price"><span><%=formatPrice(element.food.price)%></span></td>
                                     <td class="pro-quantity">
                                         <div class="quantity">
-                                            <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" value="1" type="text">
+                                            <form class="cart-plus-minus" method="post" action="/updateToCart">
+                                                <input class="cart-plus-minus-box" value="<%= element.quantity %>" name="quantity" type="text" required>
+                                                
+                                                
                                                 <div class="dec qtybutton">-</div>
                                                 <div class="inc qtybutton">+</div>
-                                            </div>
+                                                <input name = "foodID" value="<%= element.food._id %>" type="text">
+                                                
+                                            </form>
                                         </div>
                                     </td>
-                                    <td class="pro-subtotal"><span>$95.00</span></td>
-                                    <td class="pro-remove"><a href="#"><i class="ti-trash"></i></a></td>
+                                    <td class="pro-subtotal"><span><%=formatPrice(element.food.price*element.quantity)%></span></td>
+                                    <td class="pro-remove">
+                                        <button onclick="this.parentElement.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.submit()" type="submit" class="btn btn btn-gray-deep btn-hover-primary">Update</button>
+                                        <a href="#"><i class="ti-trash"></i></a></td>
                                 </tr>
-                                <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img class="fit-image" src="assets/images/products/small-product/5.png" alt="Product" /></a></td>
-                                    <td class="pro-title"><a href="#">Basic Birds Food</a></td>
-                                    <td class="pro-price"><span>$75.00</span></td>
-                                    <td class="pro-quantity">
-                                        <div class="quantity">
-                                            <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" value="1" type="text">
-                                                <div class="dec qtybutton">-</div>
-                                                <div class="inc qtybutton">+</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="pro-subtotal"><span>$75.00</span></td>
-                                    <td class="pro-remove"><a href="#"><i class="ti-trash"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img class="fit-image" src="assets/images/products/small-product/3.png" alt="Product" /></a></td>
-                                    <td class="pro-title"><a href="#">Dog Trainning Center</a></td>
-                                    <td class="pro-price"><span>$28.00</span></td>
-                                    <td class="pro-quantity">
-                                        <div class="quantity">
-                                            <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" value="1" type="text">
-                                                <div class="dec qtybutton">-</div>
-                                                <div class="inc qtybutton">+</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="pro-subtotal"><span>$56.00</span></td>
-                                    <td class="pro-remove"><a href="#"><i class="ti-trash"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img class="fit-image" src="assets/images/products/small-product/4.png" alt="Product" /></a></td>
-                                    <td class="pro-title"><a href="#">Animal Rescue Center</a></td>
-                                    <td class="pro-price"><span>$20.00</span></td>
-                                    <td class="pro-quantity">
-                                        <div class="quantity">
-                                            <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" value="1" type="text">
-                                                <div class="dec qtybutton">-</div>
-                                                <div class="inc qtybutton">+</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="pro-subtotal"><span>$40.00</span></td>
-                                    <td class="pro-remove"><a href="#"><i class="ti-trash"></i></a></td>
-                                </tr>
+                            <% }) %>
                             </tbody>
                             <!-- Table Body End -->
 
@@ -347,7 +309,7 @@
                         <!-- Cart Button left Side Start -->
                         <div class="cart-btn-lef-side m-b-20">
                             <a href="#" class="btn btn btn-gray-deep btn-hover-primary">Continue Shopping</a>
-                            <a href="#" class="btn btn btn-gray-deep btn-hover-primary">Update Shopping Cart</a>
+                           
                         </div>
                         <!-- Cart Button left Side End -->
 

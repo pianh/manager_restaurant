@@ -25,7 +25,7 @@
     <!-- Breadcrumb Area End -->
 
     <!-- Single Product Section Start -->
-    <div class="section section-margin">
+    <form class="section section-margin" method="post" action="/addToCart">
         <div class="container">
             <div class="row">
 
@@ -114,10 +114,11 @@
                         <div class="quantity d-flex align-items-center m-b-25">
                             <span class="m-r-10"><strong>Số lượng: </strong></span>
                             <div class="cart-plus-minus">
-                                <input class="cart-plus-minus-box" value="1" type="text">
+                                <input name = "quantity" class="cart-plus-minus-box" value="1" type="text">
                                 <div class="dec qtybutton"></div>
                                 <div class="inc qtybutton"></div>
                             </div>
+                            <input name = "foodID" value="<%= food._id %>" type="text" hidden>
                         </div>
                         <!-- Quantity End -->
 
@@ -125,7 +126,7 @@
                         <div class="cart-btn action-btn m-b-30">
                             <div class="action-cart-btn-wrapper d-flex">
                                 <div class="add-to_cart">
-                                    <a class="btn btn-primary btn-hover-dark rounded-0" href="">Thêm vào giỏ hàng</a>
+                                    <button class="btn btn-primary btn-hover-dark rounded-0" type="submit">Thêm vào giỏ hàng</button>
                                 </div>
                                 <a href="" title="Wishlist" class="action"><i class="ti-heart"></i></a>
                             </div>
@@ -160,7 +161,7 @@
 
             </div>
         </div>
-    </div>
+    </form>
     <!-- Single Product Section End -->
 
     <!-- Single Product Tab Start -->

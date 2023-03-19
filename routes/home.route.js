@@ -10,6 +10,13 @@ router.route("/login").get(home.login).post(home.loginHandle);
 router.route("/register").get(home.register).post(home.registerHandle);
 router.route("/food/:id").get(home.detailFood);
 
+router.route("/cart").get(home.cart);
+router.route("/addToCart").post(home.addCart);
+
+router.route("/updateToCart").post(home.updateCart); 
+
 router.route("/").get(home.index);
+
+
 
 module.exports = router;

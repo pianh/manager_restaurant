@@ -17,6 +17,7 @@ app.use(cookieParser());
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
+
 app.use(express.static(__dirname + '/public'));
 // app.use('/css', express.static(__dirname + 'public/css'));
 // app.use('/js', express.static(__dirname + 'public/js'));
@@ -34,12 +35,8 @@ app.use('/', routes);
 // })
 
 
-app.get('/register', (req, res) => {
-  res.render('register');
-})
-app.get('/cart', (req, res) => {
-  res.render('cart');
-})
+
+
 app.get('/checkout', (req, res) => {
   res.render('checkout');
 })

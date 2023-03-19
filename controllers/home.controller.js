@@ -5,6 +5,13 @@ const { resolve } = require("path");
 const { reject } = require("bluebird");
 const { response } = require("express");
 const cookies = new CookieProvider();
+
+const formatPrice = function (price) {
+    price = price.toString().replace(/[^\d]/g, "");
+    return price.length > 0
+        ? new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(price)
+        : "";
+};
 class HomeController{
     constructor(){}
     async index(req,res){
@@ -25,15 +32,28 @@ class HomeController{
         res.render('login')
 
     }
-
+   
     async cart(req, res){
-        let a = [];
-        let aString = JSON.stringify(a);
         cookies.setParamater(req, res);
-        cookies.setCookie("carts", aString, 24);
         let bString = cookies.getCookie("carts");
-        let b = JSON.parse(bString);
+        let b = [];
+        if(bString != undefined){
+            b = JSON.parse(bString);
+        }
+        let carts = [];
+        let foodsService = new FoodsService();
+        for(let item of b){
+            let itemCart = {
+                food: await foodsService.selectById(item.food),
+                quantity: item.quantity
+        };
+        if(itemCart.food != null){
+            carts.push(itemCart);
+
+        }
+        res.render('cart', {carts:carts, formatPrice:formatPrice});
     }
+}
 
     async addCart(req, res){
         cookies.setParamater(req, res);
@@ -43,15 +63,9 @@ class HomeController{
                 food: food,
                 quantity: quantity
         };
-        if(cookies.getCookie("carts")){
+        if(cookies.getCookie("carts") != undefined){
             let bString = cookies.getCookie("carts");
-            let b = JSON.parse("bString");
-            let food = req.body.foodID;
-            let quantity = req.body.quantity;
-            let itemCart = {
-                food: food,
-                quantity: quantity
-            };
+            let b = JSON.parse(bString);
             b.push(itemCart);
             bString = JSON.stringify(b);
             cookies.setCookie("carts", bString, 24);
@@ -63,6 +77,64 @@ class HomeController{
             cookies.setCookie("carts", aString, 24);
         }
         res.redirect('/cart');
+
+    }
+
+    async removeCart(req, res){
+        cookies.setParamater(req, res);
+        if(cookies.getCookie("carts")){
+            let bString = cookies.getCookie("carts");
+            let b = JSON.parse(bString);
+            let food = req.body.foodID;
+            let bFood = b.map(x=>x.food);
+            let indexOfFoodInFoodArray = bFood.indexOf(food);
+            if(indexOfFoodInFoodArray != -1){
+                b.splice(indexOfFoodInFoodArray, 1);
+                bString = JSON.stringify(b);
+                cookies.setCookie("carts", bString, 24);
+            }
+            
+        }
+      
+        res.redirect('/cart');
+    }
+
+    async updateCart(req, res){
+        cookies.setParamater(req, res); 
+        if(cookies.getCookie("carts")){
+            let bString = cookies.getCookie("carts");
+            let b = JSON.parse(bString);
+            let food = req.body.foodID;
+            let bFood = b.map(x=>x.food);
+            let indexOfFoodInFoodArray = bFood.indexOf(food);
+            if(indexOfFoodInFoodArray != -1){
+                b.splice(indexOfFoodInFoodArray, 1);
+                bString = JSON.stringify(b);
+                cookies.setCookie("carts", bString, 24);
+            }
+            
+        }
+        let food = req.body.foodID;
+        let quantity = req.body.quantity;
+        let itemCart = {
+                food: food,
+                quantity: quantity
+        };
+        if(cookies.getCookie("carts")){
+            let bString = cookies.getCookie("carts");
+            let b = JSON.parse(bString);
+            b.push(itemCart);
+            bString = JSON.stringify(b);
+            cookies.setCookie("carts", bString, 24);
+        }
+        else{
+            let a = [];
+            a.push(itemCart);
+            let aString = JSON.stringify(a);
+            cookies.setCookie("carts", aString, 24);
+        }
+        res.redirect('/cart');
+
 
     }
 
