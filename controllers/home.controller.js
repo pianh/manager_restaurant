@@ -137,7 +137,7 @@ class HomeController{
     }
 
     async checkOut(req, res){
-       res.render('checkout')
+       res.render('checkout'); 
     }
 
     //Ham xu ly
