@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const homeRoute = require("./home.route");
+const adminRoute = require("./admin.route");
 
 // app.get('/checkout', (req, res) => {
 //     res.render('checkout');
@@ -142,5 +143,5 @@ const homeRoute = require("./home.route");
 /* GET home page. */
 router.use('/', homeRoute);
 
-
+// router.use('/admin', adminRoute);
 module.exports = router;

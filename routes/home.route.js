@@ -21,6 +21,9 @@ router.route("/checkOut").get(home.checkOut);
 
 router.route("/").get(home.index);
 
+// //Admin
+// router.route("/admin").get(home.admin);
 
+// router.route("/admin/order").get(home.adminOrder);
 
 module.exports = router;
