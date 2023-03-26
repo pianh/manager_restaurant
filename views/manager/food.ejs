@@ -4,24 +4,25 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--favicon-->
-	<link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
+	<link rel="icon" href="/assets/images/favicon-32x32.png" type="image/png" />
 	<!--plugins-->
-	<link href="assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
-	<link href="assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
-	<link href="assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
+	<link href="/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+	<link href="/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+	<link href="/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
 	<!-- loader-->
-	<link href="assets/css/pace.min.css" rel="stylesheet" />
-	<script src="assets/js/pace.min.js"></script>
+	<link href="/assets/css/pace.min.css" rel="stylesheet" />
+	<script src="/assets/js/pace.min.js"></script>
 	<!-- Bootstrap CSS -->
-	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
-	<link href="assets/css/bootstrap-extended.css" rel="stylesheet">
+	<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/assets/css/bootstrap-extended.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-	<link href="assets/css/app.css" rel="stylesheet">
-	<link href="assets/css/icons.css" rel="stylesheet">
+	<link href="/assets/css/app.css" rel="stylesheet">
+	<link href="/assets/css/icons.css" rel="stylesheet">
 	<!-- Theme Style CSS -->
-	<link rel="stylesheet" href="assets/css/dark-theme.css" />
-	<link rel="stylesheet" href="assets/css/semi-dark.css" />
-	<link rel="stylesheet" href="assets/css/header-colors.css" />
+	<link rel="stylesheet" href="/assets/css/dark-theme.css" />
+	<link rel="stylesheet" href="/assets/css/semi-dark.css" />
+	<link rel="stylesheet" href="/assets/css/header-colors.css" />
+	<link rel="stylesheet" href="/datatables/css/jquery.dataTables.css">
 	<title>Synadmin – Bootstrap5 Admin Template</title>
 </head><body>
 	<!--wrapper-->
@@ -30,7 +31,7 @@
 		<div class="sidebar-wrapper" data-simplebar="true">
 			<div class="sidebar-header">
 				<div>
-					<img src="assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
+					<img src="/assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
 				</div>
 				<div>
 					<h4 class="logo-text">Synadmin</h4>
@@ -249,7 +250,7 @@
 					</div>
 					<div class="user-box dropdown">
 						<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<img src="assets/images/avatars/avatar_2.jpg" class="user-img" alt="user avatar">
+							<img src="/assets/images/avatars/avatar_2.jpg" class="user-img" alt="user avatar">
 							<div class="user-info ps-3">
 								<p class="user-name mb-0">Anh Thư</p>
 								<p class="designattion mb-0">Web Designer</p>
@@ -288,7 +289,7 @@
 							<ol class="breadcrumb mb-0 p-0">
 								<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
 								</li>
-								<li class="breadcrumb-item active" aria-current="page">Đơn đặt hàng</li>
+								<li class="breadcrumb-item active" aria-current="page">Danh sách món ăn</li>
 							</ol>
 						</nav>
 					</div>
@@ -309,26 +310,22 @@
 			  
 				<div class="card">
 					<div class="card-body">
-						<div class="d-lg-flex align-items-center mb-4 gap-3">
-							<div class="position-relative">
-								<input type="text" class="form-control ps-5 radius-30" placeholder="Search Order"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
-							</div>
-						  <div class="ms-auto"><a href="javascript:;" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Add New Order</a></div>
-						</div>
+						<h1>Quản lý thức ăn</h1>
 						<div class="table-responsive">
-							<table class="table mb-0">
+							<table class="table-allow-pagination table mb-0">
 								<thead class="table-light">
 									<tr>
 										<th>STT</th>
-										<th>Tên khách hàng</th>
-										<th>Trạng thái</th>
-										<th>Số điện thoại</th>
-										<th>Ngày nhận</th>
-										<th>View Details</th>
-										<th>Actions</th>
+										<th class="non-searchable">Hình ảnh</th>
+										<th>Tên món ăn</th>
+										<th>Giá</th>
+										<th>Mô tả</th>
+										<th class="non-orderable non-searchable">View Details</th>
+										<th class="non-orderable non-searchable">Actions</th>
 									</tr>
 								</thead>
 								<tbody>
+									<% for(let i =0 ; i < 100; i++){%>
 									<tr>
 										<td>
 											<div class="d-flex align-items-center">
@@ -340,23 +337,19 @@
 												</div> -->
 											</div>
 										</td>
-										<td>Gaspur Antunes</td>
-										<td><div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class='bx bxs-circle me-1'></i>FulFilled</div></td>
-
-										<!-- <td><div class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Partially shipped</div></td> -->
-
-										<!-- <td><div class="badge rounded-pill text-info bg-light-info p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Confirmed</div></td> -->
-										
+										<td></td>
+										<td>Gaspur Antunes <%= i %></td>
 										<td>$485.20</td>
 										<td>June 10, 2020</td>
 										<td><button type="button" class="btn btn-primary btn-sm radius-30 px-4">View Details</button></td>
 										<td>
 											<div class="d-flex order-actions">
-												<a href="javascript:;" class=""><i class='bx bxs-edit'></i></a>
+												<a href="/maneger/food/edit/<%= i %>" class=""><i class='bx bxs-edit'></i></a>
 												<a href="javascript:;" class="ms-3"><i class='bx bxs-trash'></i></a>
 											</div>
 										</td>
 									</tr>
+									<% }%>
 								</tbody>
 							</table>
 						</div>
@@ -474,14 +467,16 @@
 	</div>
 	<!--end switcher-->
 	<!-- Bootstrap JS -->
-	<script src="assets/js/bootstrap.bundle.min.js"></script>
+	<script src="/assets/js/bootstrap.bundle.min.js"></script>
 	<!--plugins-->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/plugins/simplebar/js/simplebar.min.js"></script>
-	<script src="assets/plugins/metismenu/js/metisMenu.min.js"></script>
-	<script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/plugins/simplebar/js/simplebar.min.js"></script>
+	<script src="/assets/plugins/metismenu/js/metisMenu.min.js"></script>
+	<script src="/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+	<script type="application/javascript" src="/datatables/js/jquery.dataTables.min.js"></script>
+	<script type="application/javascript" src="/js/js-for-client.js"></script>
 	<!--app JS-->
-	<script src="assets/js/app.js"></script>
+	<script src="/assets/js/app.js"></script>
 </body>
 
 </html>

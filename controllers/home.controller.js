@@ -21,7 +21,7 @@ class HomeController{
         let foodList = await foodsService.select({restaurant:restaurantList[0]});
         let commentsService = new CommentsService();
         let commentsList = await commentsService.selectAll();
-        res.render('index', {
+        res.render('home/index', {
             restaurantList: restaurantList,
             foodList: foodList,
             commentsList: commentsList
@@ -29,7 +29,7 @@ class HomeController{
     }
     //Ham show login
     async login(req, res){
-        res.render('login')
+        res.render('home/login')
 
     }
    
@@ -53,7 +53,7 @@ class HomeController{
     
             }
         }
-        res.render('cart', {carts:carts, formatPrice:formatPrice});
+        res.render('home/cart', {carts:carts, formatPrice:formatPrice});
     
     }
 
@@ -137,7 +137,7 @@ class HomeController{
     }
 
     async checkOut(req, res){
-       res.render('checkout'); 
+       res.render('home/checkout'); 
     }
 
     //Ham xu ly
@@ -156,13 +156,13 @@ class HomeController{
                 res.redirect('/')
             }
         }else{
-            res.render('login',{message: "Sai tên đăng nhập hoặc mật khẩu. Vui lòng đăng nhập lại!"});    
+            res.render('home/login',{message: "Sai tên đăng nhập hoặc mật khẩu. Vui lòng đăng nhập lại!"});    
         }
       
     }
 
     async register(req, res){
-        res.render('register')
+        res.render('home/register')
     }
 
     async registerHandle(req, res){
@@ -174,7 +174,7 @@ class HomeController{
             password: req.body.password
         }
         let customer = await userService.create(user);
-        res.render('login', {message: "Bạn đã đăng ký thành công!"})
+        res.render('home/login', {message: "Bạn đã đăng ký thành công!"})
     }
     async restaurant(req, res){
         let id = req.params.id;
@@ -182,7 +182,7 @@ class HomeController{
         let restaurant = await restaurantsService.selectById(id);
         let foodsService = new FoodsService();
         let foodList = await foodsService.select({restaurant:restaurant});
-        res.render('restaurants', {
+        res.render('home/restaurants', {
             restaurant: restaurant,
             foodList: foodList
         });
@@ -197,7 +197,7 @@ class HomeController{
         let food = await foodsService.selectById(id);
         let mainingredientdetails = await mainingredientdetailsService.selectOne({food:food});
         // console.log(food)
-        res.render('single_product', {
+        res.render('home/single_product', {
             food: food,
             mainingredientdetails: mainingredientdetails
         });

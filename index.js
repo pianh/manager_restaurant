@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 const cookieParser = require('cookie-parser');
 
+const path = require("path");
 
 // Say our original entrance script is `app.js`
 const MongoDB = require("./providers/database")
@@ -17,6 +18,7 @@ app.use(cookieParser());
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
+app.use("/datatables", express.static(path.join(__dirname, "node_modules", "datatables", "media")));
 
 app.use(express.static(__dirname + '/public'));
 // app.use('/css', express.static(__dirname + 'public/css'));

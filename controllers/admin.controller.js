@@ -13,6 +13,8 @@ class AdminController{
         res.render('admin/adminIndex');
     }
 
+    //
+
     //Ham show trang don hang
     async adminOrder(req, res){
         res.render('admin/order');

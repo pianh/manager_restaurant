@@ -2,6 +2,7 @@ const { FoodsModel } = require("../models/index.model");
 class FoodsService {
     constructor() {}
     async selectOne(foods) {
+        foods.$or = [{status : true},{status : null}];
         try {
             const query =  FoodsModel.findOne(foods);
             return await query.exec();
@@ -10,6 +11,7 @@ class FoodsService {
         }
     }
     async select(foods) {
+        foods.$or = [{status : true},{status : null}];
         try {
             const query =  FoodsModel.find(foods);
             return await query.exec();
@@ -27,6 +29,7 @@ class FoodsService {
     }
 
     async selectAll() {
+        let foods= {$or : [{status : true},{status : null}]};
         try {
             const query =  FoodsModel.find();
             return await query.exec();
@@ -44,7 +47,7 @@ class FoodsService {
     }
     async updateOneById(foodsId,foods){
         try {
-            const query =  FoodsModel.updateOne({ '_id': new ObjectId(foodsId), }, foods);
+            const query =  FoodsModel.updateOne({ '_id': new ObjectId(foodsId), $or : [{status : true},{status : null}] }, foods);
             await query.exec();
             return ;
         } catch (err) {
@@ -53,6 +56,7 @@ class FoodsService {
     }
     
     async updateOne(filter,foods){
+        filter.$or = [{status : true},{status : null}];
         try {
             const query =  FoodsModel.updateOne(filter, foods);s
             await query.exec();
@@ -62,6 +66,7 @@ class FoodsService {
         }
     }
     async update(filter,foods){
+        filter.$or = [{status : true},{status : null}];
         try {
             const query =  FoodsModel.updateMany(filter, foods);
             await query.exec();
@@ -72,7 +77,7 @@ class FoodsService {
     }
     async deleteById(foodsId){
         try {
-            const query =  FoodsModel.deleteOne({ '_id': new ObjectId(foodsId), }, foods);
+            const query =  FoodsModel.deleteOne({ '_id': new ObjectId(foodsId), $or : [{status : true},{status : null}] }, foods);
             await query.exec();
             return ;
         } catch (err) {
@@ -80,6 +85,7 @@ class FoodsService {
         }
     }
     async deleteOne(filter){
+        filter.$or = [{status : true},{status : null}];
         try {
             const query =  FoodsModel.deleteOne(filter, foods);
             await query.exec();
@@ -90,6 +96,7 @@ class FoodsService {
     }
     
     async delete(filter){
+        filter.$or = [{status : true},{status : null}];
         try {
             const query =  FoodsModel.deleteMany(filter, foods);
             await query.exec();
