@@ -2,6 +2,7 @@ const { MainingredientDetailsModel } = require("../models/index.model");
 class  MainingredientDetailsService {
     constructor() {}
     async selectOne(mainingredientdetails) {
+        mainingredientdetails.$or = [{status : true},{status : null}];
         try {
             const query = MainingredientDetailsModel.findOne(mainingredientdetails);
             return await query.exec();
@@ -10,6 +11,7 @@ class  MainingredientDetailsService {
         }
     }
     async select(mainingredientdetails) {
+        mainingredientdetails.$or = [{status : true},{status : null}];
         try {
             const query = MainingredientDetailsModel.find(mainingredientdetails);
             return await query.exec();
@@ -18,6 +20,7 @@ class  MainingredientDetailsService {
         }
     }
     async selectAll() {
+        let mainingredientdetails = {$or : [{status : true},{status : null}]};
         try {
             const query = MainingredientDetailsModel.find();
             return await query.exec();
@@ -35,7 +38,7 @@ class  MainingredientDetailsService {
     }
     async updateOneById(mainingredientdetailsId,mainingredientdetails){
         try {
-            const query = MainingredientDetailsModel.updateOne({ '_id': new ObjectId(mainingredientdetailsId), },mainingredientdetails);
+            const query =  MainingredientDetailsModel.updateOne({ '_id': new ObjectId(mainingredientdetailsId), $or : [{status : true},{status : null}] }, mainingredientdetails);
             await query.exec();
             return ;
         } catch (err) {
@@ -44,6 +47,7 @@ class  MainingredientDetailsService {
     }
     
     async updateOne(filter,mainingredientdetails){
+        filter.$or = [{status : true},{status : null}];
         try {
             const query = MainingredientDetailsModel.updateOne(filter,mainingredientdetails);
             await query.exec();
@@ -53,6 +57,7 @@ class  MainingredientDetailsService {
         }
     }
     async update(filter,mainingredientdetails){
+        filter.$or = [{status : true},{status : null}];
         try {
             const query = MainingredientDetailsModel.updateMany(filter,mainingredientdetails);
             await query.exec();
@@ -63,7 +68,7 @@ class  MainingredientDetailsService {
     }
     async deleteById(mainingredientdetailsId){
         try {
-            const query = MainingredientDetailsModel.deleteOne({ '_id': new ObjectId(billsId), },mainingredientdetails);
+            const query =  MainingredientDetailsModel.deleteOne({ '_id': new ObjectId(mainingredientdetailsId), $or : [{status : true},{status : null}] }, mainingredientdetails);
             await query.exec();
             return ;
         } catch (err) {
@@ -71,6 +76,7 @@ class  MainingredientDetailsService {
         }
     }
     async deleteOne(filter){
+        filter.$or = [{status : true},{status : null}];
         try {
             const query = MainingredientDetailsModel.deleteOne(filter,mainingredientdetails);
             await query.exec();
@@ -81,6 +87,7 @@ class  MainingredientDetailsService {
     }
     
     async delete(filter){
+        filter.$or = [{status : true},{status : null}];
         try {
             const query = MainingredientDetailsModel.deleteMany(filter,mainingredientdetails);
             await query.exec();

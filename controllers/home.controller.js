@@ -6,6 +6,9 @@ const { reject } = require("bluebird");
 const { response } = require("express");
 const cookies = new CookieProvider();
 
+const fs = require("fs");
+const path = require("path");
+
 const formatPrice = function (price) {
     price = price.toString().replace(/[^\d]/g, "");
     return price.length > 0
@@ -78,7 +81,7 @@ class HomeController{
             let aString = JSON.stringify(a);
             cookies.setCookie("carts", aString, 24);
         }
-        res.redirect('/cart');
+        res.redirect('/home/cart');
 
     }
 
@@ -98,12 +101,12 @@ class HomeController{
             
         }
       
-        res.redirect('/cart');
+        res.redirect('/home/cart');
     }
     async clearAllCart(req, res){
         cookies.setParamater(req, res); 
         cookies.clearCookie("carts");
-        res.redirect('/cart');
+        res.redirect('/home/cart');
     }
 
     async updateCart(req, res){
@@ -128,10 +131,7 @@ class HomeController{
                 }
             }
             
-            
-        
-        
-        res.redirect('/cart');
+        res.redirect('/home/cart');
 
 
     }
@@ -143,17 +143,24 @@ class HomeController{
     //Ham xu ly
     async loginHandle(req, res){
         let userService = new UserService();
+        let managersService = new ManagersService();
         let user = {
             username: req.body.username,
             password: req.body.password
 
         }
         let customer = await userService.selectOne(user);
+        console.log(customer);
         if(customer){
             if(customer.isAdmin){
                 res.redirect('/admin')
             }else{
-                res.redirect('/')
+                let manager = await managersService.selectOne({user:customer});
+                if(manager){
+                    res.redirect('/manager/'+manager._id)
+                } else {
+                    res.redirect('/')
+                }
             }
         }else{
             res.render('home/login',{message: "Sai tên đăng nhập hoặc mật khẩu. Vui lòng đăng nhập lại!"});    
@@ -186,8 +193,6 @@ class HomeController{
             restaurant: restaurant,
             foodList: foodList
         });
-
-
     }
 
     async detailFood(req, res){
@@ -210,81 +215,11 @@ class HomeController{
     async test(req,res){
         let fakedata = new FakeDataVietnamese();
         let restaurantsService = new RestaurantsService();
-        let foodsService = new FoodsService();
-        let mainingredientDetailsService = new MainingredientDetailsService();
-        let mainingredientsService = new MainingredientsService();
-        let foods = await foodsService.selectAll();
-        let mainingredients = await mainingredientsService.selectAll();
-        // let tmps = [];
-        // for(let food of foods){
-        //     let indexOfMI = Math.floor((Math.random()*(mainingredients.length-1)));
-        //     let numberMIOfMID = Math.floor((Math.random()*(5 -3))+3);
-        //     let mainingredientsOfMID = mainingredients.slice(indexOfMI,indexOfMI+numberMIOfMID);
-        //     let quantity = Math.floor((Math.random()*(15 -1))+1)*10;
-        //     let unit = "mg";
-        //     let tmp = {
-        //         food: food,
-        //         mainingredients: mainingredientsOfMID,
-        //         quantity: quantity,
-        //         unit: unit
-        //     }
-        //     tmps.push(tmp);
-        // }
-        // let tablesService = new TablesService();
-
-        // let tble = [];
-        // let tables = ['bàn tròn', 'bàn vuông', 'bàn hình chữ nhật'];
-        // for(let table of tables){
-        //     let tb = {
-        //        name: table
-        //     }
-        //     tble.push(tb);
-        // }
-        // // await tablesService.create(tble)
-        // res.json("sasd")
-
-        // let typesofpartyService = new TypesOfPartyService();
-        // let tp = [];
-        // let types = ['tiệc cưới', 'tiệc sinh nhật', 'tiệc mừng thọ', 'tiệc trà', 'tiệc rượu', 'tiệc Buffet']
-        // for(let type of types){
-        //      let tb = {
-        //         name: type
-        //      }
-        //      tp.push(tb);
-        // }
-        // await typesofpartyService.create(tp)
-        // res.json("sasd")
-
-        let managersService = new ManagersService();
-        let userService = new UserService();
-        let managers = await userService.selectAll();
-        let restaurants = await restaurantsService.selectAll();
-        let tmps = [];
-        let arr = [];
-        for(let restaurant of restaurants){
-            // Math.floor(Math.random() * 100) + 1;
-            // Math.random*(managers.length-1)
-            let randomIndex = Math.floor((Math.random()*(managers.length-1)));
-            while(arr.indexOf(randomIndex) != -1){
-                randomIndex = Math.floor((Math.random()*(managers.length-1)));
-            }
-            arr.push(randomIndex);
-             let tmp = {
-                user: managers[randomIndex],
-                restaurant: restaurant,
-                expire_at: new Date(new Date().setDate(new Date().getDate() + Math.floor((Math.random()*(120-30)+30))))
-             }
-             tmps.push(tmp);
-         }
-        await managersService.create(tmps);
-        res.json(tmps)
+        
+        res.json("a")
 
 
 }
-
-
-
-
 
 }
 module.exports ={HomeController}

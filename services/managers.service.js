@@ -2,6 +2,7 @@ const { ManagerModel } = require("../models/index.model");
 class ManagersService {
     constructor() {}
     async selectOne(managers) {
+        managers.$or = [{status : true},{status : null}];
         try {
             const query =  ManagerModel.findOne(managers);
             return await query.exec();
@@ -10,6 +11,7 @@ class ManagersService {
         }
     }
     async select(managers) {
+        managers.$or = [{status : true},{status : null}];
         try {
             const query =  ManagerModel.find(managers);
             return await query.exec();
@@ -18,6 +20,7 @@ class ManagersService {
         }
     }
     async selectAll() {
+        let managers= {$or : [{status : true},{status : null}]};
         try {
             const query =  ManagerModel.find();
             return await query.exec();
@@ -27,13 +30,14 @@ class ManagersService {
     }
     async create(managers) {
         try {
-            await  ManagerModel.create(managers);
+            await ManagerModel.create(managers);
             return;
         } catch (err) {
             console.log(err);
         }
     }
     async updateOneById(managersId,managers){
+        const query =  ManagerModel.updateOne({ '_id': new ObjectId(managersId), $or : [{status : true},{status : null}] }, managersId);
         try {
             const query =  ManagerModel.updateOne({ '_id': new ObjectId(managersId), }, managers);
             await query.exec();
@@ -44,6 +48,7 @@ class ManagersService {
     }
     
     async updateOne(filter,managers){
+        filter.$or = [{status : true},{status : null}];
         try {
             const query =  ManagerModel.updateOne(filter, managers);s
             await query.exec();
@@ -53,6 +58,7 @@ class ManagersService {
         }
     }
     async update(filter,managers){
+        filter.$or = [{status : true},{status : null}];
         try {
             const query =  ManagerModel.updateMany(filter, managers);
             await query.exec();
@@ -63,7 +69,7 @@ class ManagersService {
     }
     async deleteById(managersId){
         try {
-            const query =  ManagerModel.deleteOne({ '_id': new ObjectId(managersId), }, managers);
+            const query =  ManagerModel.deleteOne({ '_id': new ObjectId(foodsId), $or : [{status : true},{status : null}] }, foods);
             await query.exec();
             return ;
         } catch (err) {
@@ -71,6 +77,7 @@ class ManagersService {
         }
     }
     async deleteOne(filter){
+        filter.$or = [{status : true},{status : null}];
         try {
             const query =  ManagerModel.deleteOne(filter, managers);
             await query.exec();
@@ -81,6 +88,7 @@ class ManagersService {
     }
     
     async delete(filter){
+        filter.$or = [{status : true},{status : null}];
         try {
             const query =  ManagerModel.deleteMany(filter, managers);
             await query.exec();

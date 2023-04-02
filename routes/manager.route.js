@@ -6,14 +6,15 @@ const {ManagermentController} = require('../controllers/manager.controller');
 var manager = new ManagermentController();
 
 //Trang chu cua manager
-router.route("/").get(manager.managermentIndex);
+router.route("/:restaurantId").get(manager.managermentIndex);
 
 //Trang don hang
-router.route("/order").get(manager.managermentOrder);
+router.route("/order/:restaurantId").get(manager.managermentOrder);
 
 //Trang mon an
 
-router.route("/food").get(manager.managermentFood);
+router.route("/food/:restaurantId").get(manager.managermentFood);
+
 
 router.route("/food/edit/:id").get(manager.managermentEditFood).post(upload.array("images",4),manager.editFoodHandlle);
 

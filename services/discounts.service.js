@@ -2,6 +2,7 @@ const { DiscountsModel } = require("../models/index.model");
 class DiscountsService {
     constructor() {}
     async selectOne(discounts) {
+        discounts.$or = [{status : true},{status : null}];
         try {
             const query = DiscountsModel.findOne(discounts);
             return await query.exec();
@@ -10,6 +11,7 @@ class DiscountsService {
         }
     }
     async select(discounts) {
+        discounts.$or = [{status : true},{status : null}];
         try {
             const query = DiscountsModel.find(discounts);
             return await query.exec();
@@ -18,6 +20,7 @@ class DiscountsService {
         }
     }
     async selectAll() {
+        let discounts= {$or : [{status : true},{status : null}]};
         try {
             const query = DiscountsModel.find();
             return await query.exec();
@@ -34,6 +37,7 @@ class DiscountsService {
         }
     }
     async updateOneById(discountsId,discounts){
+        const query =  DiscountsModel.updateOne({ '_id': new ObjectId(discountsId), $or : [{status : true},{status : null}] }, discounts);
         try {
             const query = DiscountsModel.updateOne({ '_id': new ObjectId(discountsId), }, discounts);
             await query.exec();
@@ -44,6 +48,7 @@ class DiscountsService {
     }
     
     async updateOne(filter,discounts){
+        filter.$or = [{status : true},{status : null}];
         try {
             const query = DiscountsModel.updateOne(filter, discounts);s
             await query.exec();
@@ -53,6 +58,7 @@ class DiscountsService {
         }
     }
     async update(filter,discounts){
+        filter.$or = [{status : true},{status : null}];
         try {
             const query = DiscountsModel.updateMany(filter, discounts);
             await query.exec();
@@ -63,7 +69,7 @@ class DiscountsService {
     }
     async deleteById(discountsId){
         try {
-            const query = DiscountsModel.deleteOne({ '_id': new ObjectId(discountsId), }, discounts);
+            const query =  DiscountsModel.deleteOne({ '_id': new ObjectId(discountsId), $or : [{status : true},{status : null}] }, discounts);
             await query.exec();
             return ;
         } catch (err) {
@@ -71,6 +77,7 @@ class DiscountsService {
         }
     }
     async deleteOne(filter){
+        filter.$or = [{status : true},{status : null}];
         try {
             const query =DiscountsModel.deleteOne(filter, discounts);
             await query.exec();
@@ -81,6 +88,7 @@ class DiscountsService {
     }
     
     async delete(filter){
+        filter.$or = [{status : true},{status : null}];
         try {
             const query = DiscountsModel.deleteMany(filter, discounts);
             await query.exec();

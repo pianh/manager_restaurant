@@ -2,6 +2,7 @@ const { CommentsModel } = require("../models/index.model");
 class CommentsService {
     constructor() {}
     async selectOne(comments) {
+        comments.$or = [{status : true},{status : null}];
         try {
             const query = CommentsModel.findOne(comments);
             return await query.exec();
@@ -10,6 +11,7 @@ class CommentsService {
         }
     }
     async select(comments) {
+        comments.$or = [{status : true},{status : null}];
         try {
             const query = CommentsModel.find(comments);
             return await query.exec();
@@ -18,6 +20,7 @@ class CommentsService {
         }
     }
     async selectAll() {
+        let comments= {$or : [{status : true},{status : null}]};
         try {
             const query = CommentsModel.find();
             return await query.exec();
@@ -34,6 +37,7 @@ class CommentsService {
         }
     }
     async updateOneById(commentsId,comments){
+        const query =  CommentsModel.updateOne({ '_id': new ObjectId(commentsId), $or : [{status : true},{status : null}] }, comments);
         try {
             const query = CommentsModel.updateOne({ '_id': new ObjectId(commentsId), }, comments);
             await query.exec();
@@ -44,6 +48,7 @@ class CommentsService {
     }
     
     async updateOne(filter,comments){
+        filter.$or = [{status : true},{status : null}];
         try {
             const query = CommentsModel.updateOne(filter,comments);
             await query.exec();
@@ -53,6 +58,7 @@ class CommentsService {
         }
     }
     async update(filter,comments){
+        filter.$or = [{status : true},{status : null}];
         try {
             const query = CommentsModel.updateMany(filter, comments);
             await query.exec();
@@ -63,7 +69,7 @@ class CommentsService {
     }
     async deleteById(commentsId){
         try {
-            const query = CommentsModel.deleteOne({ '_id': new ObjectId(commentsId), }, comments);
+            const query =  CommentsModel.deleteOne({ '_id': new ObjectId(commentsId), $or : [{status : true},{status : null}] }, comments);
             await query.exec();
             return ;
         } catch (err) {

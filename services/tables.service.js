@@ -2,6 +2,7 @@ const { TablesModel } = require("../models/index.model");
 class  TablesService {
     constructor() {}
     async selectOne(tables) {
+        tables.$or = [{status : true},{status : null}];
         try {
             const query = TablesModel.findOne(tables);
             return await query.exec();
@@ -10,6 +11,7 @@ class  TablesService {
         }
     }
     async select(tables) {
+        tables.$or = [{status : true},{status : null}];
         try {
             const query = TablesModel.find(tables);
             return await query.exec();
@@ -17,7 +19,16 @@ class  TablesService {
             console.log(err);
         }
     }
+    async selectById(tables) {
+        try {
+            const query = TablesModel.findById(tables);
+            return await query.exec();
+        } catch (err) {
+            console.log(err);
+        }
+    }
     async selectAll() {
+        let tables = {$or : [{status : true},{status : null}]};
         try {
             const query = TablesModel.find();
             return await query.exec();
@@ -35,7 +46,7 @@ class  TablesService {
     }
     async updateOneById(tablesId,tables){
         try {
-            const query = TablesModel.updateOne({ '_id': new ObjectId(tablesId), }, tables);
+            const query =  FoodsModel.updateOne({ '_id': new ObjectId(tablesId), $or : [{status : true},{status : null}] }, tables);
             await query.exec();
             return ;
         } catch (err) {

@@ -21,23 +21,8 @@ app.set('view engine', 'ejs');
 app.use("/datatables", express.static(path.join(__dirname, "node_modules", "datatables", "media")));
 
 app.use(express.static(__dirname + '/public'));
-// app.use('/css', express.static(__dirname + 'public/css'));
-// app.use('/js', express.static(__dirname + 'public/js'));
-// app.use('/images', express.static(__dirname + 'public/images'));
-// app.use('/fonts', express.static(__dirname + 'public/fonts'));
-
-
-// app.use('/assets', express.static(__dirname + 'public/assets/'));
-
-
 
 app.use('/', routes); 
-// app.get('/amber', (req, res) => {
-//   res.render('index');
-// })
-
-
-
 
 async function runServer(){
   try {

@@ -22,7 +22,14 @@ class ManagermentController{
 
     //Ham show trang mon an
     async managermentFood(req, res){
-        res.render('manager/food');
+        let restaurantId = req.params.restaurantId;
+        let restaurantsService = new RestaurantsService();
+        let restaurant = await restaurantsService.selectById(restaurantId);
+        let foodsService = new FoodsService();
+        let foods = await foodsService.select({
+            restaurant : restaurant
+        });
+        res.render('manager/food', {foods:foods})
     }
 
     //Ham show trang them mon an
@@ -35,11 +42,12 @@ class ManagermentController{
         let id = req.params.id;
         let foodsService = new FoodsService();
         let food = await foodsService.selectById(id);
-
         res.render('manager/edit_Food',{
             food : food
         });
     }
+    
+
 
     async editFoodHandlle(req, res){
         let id = req.params.id;
@@ -54,13 +62,10 @@ class ManagermentController{
             price: req.body.price,
             image_url: files
         }
-
-        
         let foodsService = new FoodsService();
         await foodsService.updateOneById(id,food);
         res.redirect("/manager/food");
     } catch (r){
-        
         let foodsService = new FoodsService();
         let food = await foodsService.selectById(id);
         res.render('manager/edit_Food',{
@@ -85,7 +90,11 @@ class ManagermentController{
 
     //Ham show chi tiet thanh phan
     async managermentIngredientList(req, res){
-        res.render('manager/ingredientList');
+        let  mainingredientsService = new  MainingredientsService();
+        let mainingredients = await mainingredientsService.selectAll();
+        res.render('manager/ingredientList',{
+            mainingredients: mainingredients
+        });
     }
 
     //Ham them chi tiet
@@ -100,6 +109,7 @@ class ManagermentController{
 
     //Ham them bua tiec
     async managermentAddParty(req, res){
+
         res.render('manager/addParty');
     }
     //Ham show ban

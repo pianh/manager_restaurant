@@ -2,6 +2,7 @@ const { RestaurantsModel } = require("../models/index.model");
 class RestaurantsService {
     constructor() {}
     async selectOne(restaurants) {
+        restaurants.$or = [{status : true},{status : null}];
         try {
             const query = RestaurantsModel.findOne(restaurants);
             return await query.exec();
@@ -18,6 +19,7 @@ class RestaurantsService {
         }
     }
     async select(restaurants) {
+        restaurants.$or = [{status : true},{status : null}];
         try {
             const query = RestaurantsModel.find(restaurants);
             return await query.exec();
@@ -26,6 +28,7 @@ class RestaurantsService {
         }
     }
     async selectAll() {
+        let restaurants = {$or : [{status : true},{status : null}]};
         try {
             const query = RestaurantsModel.find();
             return await query.exec();
@@ -43,7 +46,7 @@ class RestaurantsService {
     }
     async updateOneById(restaurantsId,restaurants){
         try {
-            const query = RestaurantsModel.updateOne({ '_id': new ObjectId(restaurantsId), }, restaurants);
+            const query =  RestaurantsModel.updateOne({ '_id': new ObjectId(restaurantsId), $or : [{status : true},{status : null}]}, restaurants);
             await query.exec();
             return ;
         } catch (err) {
@@ -53,7 +56,7 @@ class RestaurantsService {
     
     async updateOne(filter,restaurants){
         try {
-            const query = RestaurantsModel.updateOne(filter, restaurants);s
+            const query = RestaurantsModel.updateOne(filter, restaurants);
             await query.exec();
             return ;
         } catch (err) {
@@ -61,6 +64,7 @@ class RestaurantsService {
         }
     }
     async update(filter,restaurants){
+        filter.$or = [{status : true},{status : null}];
         try {
             const query = RestaurantsModel.updateMany(filter, restaurants);
             await query.exec();
@@ -71,7 +75,7 @@ class RestaurantsService {
     }
     async deleteById(restaurantsId){
         try {
-            const query = RestaurantsModel.deleteOne({ '_id': new ObjectId(restaurantsId), }, restaurants);
+            const query =  RestaurantsModel.deleteOne({ '_id': new ObjectId(restaurantsId), $or : [{status : true},{status : null}] }, restaurants);
             await query.exec();
             return ;
         } catch (err) {
@@ -79,6 +83,7 @@ class RestaurantsService {
         }
     }
     async deleteOne(filter){
+        filter.$or = [{status : true},{status : null}];
         try {
             const query = RestaurantsModel.deleteOne(filter, restaurants);
             await query.exec();
@@ -89,6 +94,7 @@ class RestaurantsService {
     }
     
     async delete(filter){
+        filter.$or = [{status : true},{status : null}];
         try {
             const query = RestaurantsModel.deleteMany(filter, restaurants);
             await query.exec();

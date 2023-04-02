@@ -16,7 +16,7 @@
                     <div class="breadcrumb-wrapper">
                         <h2 class="breadcrumb-title">Giỏ hàng</h2>
                         <ul>
-                            <li><a href="index.html">Trang chủ</a></li>
+                            <li><a href="">Trang chủ</a></li>
                             <li>Giỏ hàng</li>
                         </ul>
                     </div>
@@ -56,11 +56,11 @@
                                     (element, index ) => {
                                 %> 
                                 <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img class="fit-image" src="<%=element.food.image_url.lenght > 0 ? element.food.image_url[0] : '' %>" alt="Product" /></a></td>
+                                    <td class="pro-thumbnail"><a href="#"><img class="fit-image" src="<%=element.food.image_url[0] %>" alt="Product" /></a></td>
                                     <td class="pro-title"><a href="#"><%=element.food.name%></a></td>
                                     <td class="pro-price"><span><%=formatPrice(element.food.price)%></span></td>
                                     <td class="pro-quantity">
-                                        <form class="quantity" method="post" action="/updateToCart">
+                                        <form class="quantity" method="post" action="/home/updateToCart">
                                             <div class="cart-plus-minus">
                                                 <input class="cart-plus-minus-box" value="<%= element.quantity %>" name="quantity" type="text" required>                                                
                                                 <div class="dec qtybutton">-</div>
@@ -75,7 +75,7 @@
                                     <td class="pro-remove ">
                                         <div class="d-flex">
                                             <button onclick="this.parentElement.parentElement.previousElementSibling.previousElementSibling.firstElementChild.submit()" type="submit" class="btn btn btn-gray-deep btn-hover-primary  p-2">Update</button>
-                                            <form action="/removeFromCart" method="post" class="ms-1">
+                                            <form action="/home/removeFromCart" method="post" class="ms-1">
                                                 <input name = "foodID" value="<%= element.food._id %>" type="text" hidden>
                                                 <button class="btn btn-danger p-2">
                                                     <i class="ti-trash"></i>
@@ -104,7 +104,7 @@
 
                         <!-- Cart Button Right Side Start -->
                         <div class="cart-btn-right-right m-b-20">
-                            <a href="/clearAllProductInCart" class="btn btn btn-gray-deep btn-hover-primary">Clear Shopping Cart</a>
+                            <a href="/home/clearAllProductInCart" class="btn btn btn-gray-deep btn-hover-primary">Clear Shopping Cart</a>
                         </div>
                         <!-- Cart Button Right Side End -->
 
@@ -175,19 +175,19 @@
                             <div class="swiper-container">
                                 <div class="swiper-wrapper">
                                     <a class="swiper-slide" href="#">
-                                        <img class="w-100" src="assets/images/products/large-product/1.png" alt="Product">
+                                        <img class="w-100" src="/assets/images/products/large-product/1.png" alt="Product">
                                     </a>
                                     <a class="swiper-slide" href="#">
-                                        <img class="w-100" src="assets/images/products/large-product/2.png" alt="Product">
+                                        <img class="w-100" src="/assets/images/products/large-product/2.png" alt="Product">
                                     </a>
                                     <a class="swiper-slide" href="#">
-                                        <img class="w-100" src="assets/images/products/large-product/3.png" alt="Product">
+                                        <img class="w-100" src="/assets/images/products/large-product/3.png" alt="Product">
                                     </a>
                                     <a class="swiper-slide" href="#">
-                                        <img class="w-100" src="assets/images/products/large-product/4.png" alt="Product">
+                                        <img class="w-100" src="/assets/images/products/large-product/4.png" alt="Product">
                                     </a>
                                     <a class="swiper-slide" href="#">
-                                        <img class="w-100" src="assets/images/products/large-product/5.png" alt="Product">
+                                        <img class="w-100" src="/assets/images/products/large-product/5.png" alt="Product">
                                     </a>
                                 </div>
 
@@ -289,7 +289,7 @@
                             <div class="payment-option m-t-20 d-flex justify-content-start">
                                 <span><strong>Payment: </strong></span>
                                 <a href="#">
-                                    <img class="fit-image m-l-5" src="images/payment/payment_large.png" alt="Payment Option Image">
+                                    <img class="fit-image m-l-5" src="/images/payment/payment_large.png" alt="Payment Option Image">
                                 </a>
                             </div>
                             <!-- Payment Option End -->
@@ -463,11 +463,11 @@
 
 
     <!-- 
-    <script src="assets/js/vendor/popper.min.js"></script>
-    <script src="assets/js/vendor/bootstrap.min.js"></script>
-    <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
-    <script src="assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
-    <script src="assets/js/vendor/modernizr-3.11.2.min.js"></script>   
+    <script src="/assets/js/vendor/popper.min.js"></script>
+    <script src="/assets/js/vendor/bootstrap.min.js"></script>
+    <script src="/assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="/assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
+    <script src="/assets/js/vendor/modernizr-3.11.2.min.js"></script>   
     -->
 
 
@@ -475,23 +475,23 @@
 
 
     <!-- 
-    <script src="assets/js/plugins/aos.min.js"></script>
-    <script src="assets/js/plugins/jquery.ajaxchimp.min.js"></script>
-    <script src="assets/js/plugins/jquery-ui.min.js"></script>
-    <script src="assets/js/plugins/nice-select.min.js"></script>
-    <script src="assets/js/plugins/swiper-bundle.min.js"></script>
-    <script src="assets/js/plugins/countdown.min.js"></script>
-    <script src="assets/js/plugins/lightgallery-all.min.js"></script>  
+    <script src="/assets/js/plugins/aos.min.js"></script>
+    <script src="/assets/js/plugins/jquery.ajaxchimp.min.js"></script>
+    <script src="/assets/js/plugins/jquery-ui.min.js"></script>
+    <script src="/assets/js/plugins/nice-select.min.js"></script>
+    <script src="/assets/js/plugins/swiper-bundle.min.js"></script>
+    <script src="/assets/js/plugins/countdown.min.js"></script>
+    <script src="/assets/js/plugins/lightgallery-all.min.js"></script>  
     -->
 
 
     <!-- Use the minified version files listed below for better performance and remove the files listed above -->
 
-    <script src="js/vendor.min.js"></script>
-    <script src="js/plugins.min.js"></script>
+    <script src="/js/vendor.min.js"></script>
+    <script src="/js/plugins.min.js"></script>
 
     <!--Main JS-->
-    <script src="js/main.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 
 </html>

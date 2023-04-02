@@ -58,7 +58,7 @@ class FoodsService {
     async updateOne(filter,foods){
         filter.$or = [{status : true},{status : null}];
         try {
-            const query =  FoodsModel.updateOne(filter, foods);s
+            const query =  FoodsModel.updateOne(filter, foods);
             await query.exec();
             return ;
         } catch (err) {
@@ -107,4 +107,4 @@ class FoodsService {
     }
 }
 
-module.exports = { FoodsService };
+module.exports = { FoodsService }; 
