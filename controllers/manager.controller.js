@@ -23,11 +23,20 @@ class ManagermentController{
         let restaurantId = req.params.restaurantId;
         let restaurantsService = new RestaurantsService();
         let restaurant = await restaurantsService.selectById(restaurantId);
-        let foodsService = new FoodsService();
-        let foods = await foodsService.select({
-            restaurant : restaurant
-        });
-        res.render('manager/food', {foods:foods,id: req.params.restaurantId}); 
+        console.log(restaurant);
+        // if(!restaurant){
+        //     res.send("NOT FOUND");
+        //    //Có thể render views kiểu err 404 thay vì chỉ send chuỗi về cho user
+        //    return;
+        // }
+        // else{
+            let foodsService = new FoodsService();
+            let foods = await foodsService.select({
+                restaurant : restaurant
+            });
+            res.render('manager/food', {foods:foods,id: req.params.restaurantId}); 
+        // }
+       
         
     }
 
