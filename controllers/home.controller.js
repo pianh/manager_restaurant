@@ -35,6 +35,10 @@ class HomeController{
         res.render('home/login')
 
     }
+
+    async myaccount(req, res){
+        res.render('home/myaccount');
+    }
    
     async cart(req, res){
         const cookies = new CookieProvider();

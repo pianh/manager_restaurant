@@ -21,43 +21,44 @@ router.route("/food/edit/:id").get(manager.managermentEditFood).post(upload.arra
 router.route("/food/remove/:id").get(manager.removeFoodHandle);
 
 //Trang them mon an
-router.route("/addFood").get(manager.managermentAddFood);
+router.route("/addFood/:restaurantId").get(manager.managermentAddFood);
 
 //Trang chinh sua mon an
-router.route("/editFood").get(manager.managermentEditFood);
+router.route("/editFood/:restaurantId").get(manager.managermentEditFood);
 
 //Ham show chi tiet thanh phan
-router.route("/ingredient").get(manager.managermentIngredientList);
+router.route("/ingredient/:restaurantId").get(manager.managermentIngredientList);
 
 // Trang them chi tiet thanh phan
-router.route("/addIngredient").get(manager.managermentAddIngredientList);
+router.route("/addIngredient/:restaurantId").get(manager.managermentAddIngredientList);
 
 //Trang show loai tiec
-router.route("/party").get(manager.managermentTypeOfpartyList);
+router.route("/party/:restaurantId").get(manager.managermentTypeOfpartyList);
 
 
 // Trang them bua tiec
-router.route("/addParty").get(manager.managermentAddParty);
+router.route("/addParty/:restaurantId").get(manager.managermentAddParty);
 
 //Trang danh sach ban
-router.route("/table").get(manager.managermentTable);
+router.route("/table/:restaurantId").get(manager.managermentTable);
 
 //Trang them ban
-router.route("/addTable").get(manager.managermentAddTable);
+router.route("/addTable/:restaurantId").get(manager.managermentAddTable);
 
 
 // Trang show khach hang
-router.route("/customer").get(manager.managermentCustomer);
+router.route("/customer/:restaurantId").get(manager.managermentCustomer);
 
 //Ham sua chi tiet thanh phan
-router.route("/editIngredient").get(manager.managermentEditIngredientList);
+router.route("/editIngredient/:restaurantId").get(manager.managermentEditIngredientList);
 
 //Ham sua bua tiec
-router.route("/editParty").get(manager.managermentEditParty);
+router.route("/editParty/:restaurantId").get(manager.managermentEditParty);
 
 // Ham sua ban
-router.route("/editTable").get(manager.managermentEditTable);
+router.route("/editTable/:restaurantId").get(manager.managermentEditTable);
 
-
+// Ham dat ban
+router.route("/reserveTable/:restaurantId").get(manager.managermentReserveTable);
 
 module.exports = router;

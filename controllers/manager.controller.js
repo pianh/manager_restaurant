@@ -6,19 +6,17 @@ const { reject } = require("bluebird");
 const { response } = require("express");
 const cookies = new CookieProvider();
 
-
 class ManagermentController{
     //Ham show trang quan ly
     async managermentIndex(req, res){
-        res.render('manager/managermentIndex');
+        // doan nay nhận param từ url
+        // lấy được cái id = 
+        // xong pass nó vô UI
+        res.render('manager/managermentIndex',{
+            id: req.params.restaurantId,
+        }); 
     }
 
-    
-
-    //Ham show trang don hang
-    async managermentOrder(req, res){
-        res.render('manager/order');
-    }
 
     //Ham show trang mon an
     async managermentFood(req, res){
@@ -29,12 +27,33 @@ class ManagermentController{
         let foods = await foodsService.select({
             restaurant : restaurant
         });
-        res.render('manager/food', {foods:foods})
+        res.render('manager/food', {foods:foods,id: req.params.restaurantId}); 
+        
     }
+
+    // Ham show trang don hang
+    async managermentOrder(req, res){
+        // let restaurantId = req.params.restaurantId;
+        // let restaurantsService = new RestaurantsService();
+        // let restaurant = await restaurantsService.selectById(restaurantId);
+        // console.log(req.params.restaurantId);
+        res.render('manager/order',{
+            id: req.params.restaurantId,
+        }); 
+       
+    }
+
+    
+    //Ham show trang don hang
+    // async managermentOrder(req, res){
+    //     res.render('manager/order');
+    // }
 
     //Ham show trang them mon an
     async managermentAddFood(req, res){
-        res.render('manager/addFood');
+        res.render('manager/food',{
+            id: req.params.restaurantId,
+        }); 
     }
 
     //Ham show sua mon an
@@ -93,18 +112,25 @@ class ManagermentController{
         let  mainingredientsService = new  MainingredientsService();
         let mainingredients = await mainingredientsService.selectAll();
         res.render('manager/ingredientList',{
-            mainingredients: mainingredients
+            mainingredients: mainingredients,
+            id:req.params.restaurantId
         });
+
     }
 
     //Ham them chi tiet
     async managermentAddIngredientList(req, res){
-        res.render('manager/addingredientList');
+        res.render('manager/addingredientList',{
+            id: req.params.restaurantId,
+        }); 
     }
 
     //Ham show bua tiec
     async managermentTypeOfpartyList(req, res){
-        res.render('manager/typeOfpartyList');
+        res.render('manager/typeOfpartyList',{
+            id: req.params.restaurantId,
+        }); 
+
     }
 
     //Ham them bua tiec
@@ -114,7 +140,9 @@ class ManagermentController{
     }
     //Ham show ban
     async managermentTable(req, res){
-        res.render('manager/tableList');
+        res.render('manager/tableList',{
+            id: req.params.restaurantId,
+        }); 
     }
     
     //Ham them ban
@@ -124,24 +152,39 @@ class ManagermentController{
 
     //Ham show khach hang
     async managermentCustomer(req, res){
-        res.render('manager/customerList');
+        res.render('manager/customerList',{
+            id: req.params.restaurantId,
+        }); 
     }
     
     //Ham sua thanh phan
     async managermentEditIngredientList(req, res){
-        res.render('manager/edit_IngredientList');
+        res.render('manager/edit_IngredientList',{
+            id: req.params.restaurantId,
+        }); 
     }
 
     //Ham sua bua tiec
     async managermentEditParty(req, res){
-        res.render('manager/edit_Party');
+        res.render('manager/edit_Party',{
+            id: req.params.restaurantId,
+        }); 
+       
     }
     
     //Ham sua ban
     async managermentEditTable(req, res){
-        res.render('manager/edit_Table');
+        res.render('manager/edit_Table',{
+            id: req.params.restaurantId,
+        });
     }
 
+    //ham dat ban
+    async managermentReserveTable(req, res){
+        res.render('manager/reserveTable',{
+            id:req.params.restaurantId,
+        }); 
+    }
     
 }
 

@@ -19,6 +19,8 @@ router.route("/clearAllProductInCart").get(home.clearAllCart);
 
 router.route("/checkOut").get(home.checkOut);
 
+router.route("/myaccount").get(home.myaccount);
+
 router.route("/").get(home.index);
 
 
