@@ -4,6 +4,7 @@ const {CookieProvider} = require("../providers/cookie")
 const { resolve } = require("path");
 const { reject } = require("bluebird");
 const { response } = require("express");
+const {checkHex} = require("../util/hex");
 const cookies = new CookieProvider();
 
 const fs = require("fs");
@@ -15,6 +16,8 @@ const formatPrice = function (price) {
         ? new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(price)
         : "";
 };
+
+
 class HomeController{
     constructor(){}
     async index(req,res){
@@ -160,8 +163,9 @@ class HomeController{
                 res.redirect('/admin')
             }else{
                 let manager = await managersService.selectOne({user:customer});
+                // console.log(manager);
                 if(manager){
-                    res.redirect('/manager/'+manager._id)
+                    res.redirect('/manager/'+manager.restaurant._id)
                 } else {
                     res.redirect('/')
                 }
@@ -189,6 +193,10 @@ class HomeController{
     }
     async restaurant(req, res){
         let id = req.params.id;
+        if(req.params.id && checkHex(req.params.id)){
+            res.send('NOT FOUND!!')
+            return
+        }
         let restaurantsService = new RestaurantsService();
         let restaurant = await restaurantsService.selectById(id);
         let foodsService = new FoodsService();
