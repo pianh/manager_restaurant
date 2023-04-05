@@ -97,6 +97,11 @@
                             <!-- Header My Account Button Start -->
                             <a href="/login" class="header-action-btn header-action-btn-wishlist">
                                 <i class="icon-user icons"></i>
+                                <% if (typeof username !== 'undefined') { %> 
+                                    <%= username %> 
+                                <% } else { %>
+                                    Đăng nhập
+                                <% } %>
                             </a>
                             <!-- Header My Account Button End -->
 

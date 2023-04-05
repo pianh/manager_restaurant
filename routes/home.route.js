@@ -21,7 +21,30 @@ router.route("/checkOut").get(home.checkOut);
 
 router.route("/myaccount").get(home.myaccount);
 
+
 router.route("/").get(home.index);
+// router.get('/', (req, res) => {
+//     const username = req.session.username;
+//     res.render('home/index', { username: username });
+// });
+
+// Route /myaccount
+// router.get('/home/myaccount', (req, res) => {
+//     const username = req.session.username; // Lấy thông tin username từ session
+//     const isAdmin = req.session.isAdmin; // Lấy thông tin quyền hạn quản trị viên từ session
+  
+//     // Nếu chưa đăng nhập thì chuyển hướng về trang đăng nhập
+//     if (!username) {
+//       res.redirect('/home/login');
+//       return;
+//     }
+  
+//     // Hiển thị thông tin tài khoản
+//     res.render('/home/myaccount', {
+//       username: username,
+//       isAdmin: isAdmin
+//     });
+//   });
 
 
 module.exports = router;

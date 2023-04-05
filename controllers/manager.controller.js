@@ -4,7 +4,23 @@ const {CookieProvider} = require("../providers/cookie")
 const { resolve } = require("path");
 const { reject } = require("bluebird");
 const { response } = require("express");
+const {checkHex} = require("../util/hex");
 const cookies = new CookieProvider();
+
+/*
+Nó liên quan ts url. Dùng param khi route mk định nghĩa ntn.
+Ví dụ route định nghĩa như home/:restaurantid. Thì khi đó url như là https://domain/home/123 thì req.params.restaurantid lấy dc cái restaurantid.
+Ví dụ url bà chỉ định nghĩa home/. Mà url có dạng ntn. https://domain/home?id=123&&name=abc. Lúc này req.query.id nó lấy ra cái id, req.query.name nó lấy ra cái name
+
+Dùng params hay query đều phụ thuộc vô url
+Ở cả 2 hàm
+
+Thì thêm đoạn if kia vô
+
+Mục đích là gì. Là để kiểm tra cái id đó có hợp lệ k. Kiểu nếu params nó là cái app todo.html kia ấy. Có sẽ check và trả ra false và k làm j nữa mà trả về user not found.
+
+Còn vượt qua if thì nó thực hiện query và làm vc tiếp theo
+*/
 
 class ManagermentController{
     //Ham show trang quan ly
