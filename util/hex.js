@@ -14,3 +14,9 @@ module.exports = {
         return false
     }
 }
+
+/*
+Đây là func nếu gặp chuỗi mà có chứa ký tự k thuộc ký tự hex là nó trả ra false. Còn chuỗi hợp lệ trả ra true
+
+
+*/

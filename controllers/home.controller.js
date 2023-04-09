@@ -1,4 +1,4 @@
-const { RestaurantsService, FoodsService, MainingredientsService, MainingredientDetailsService, TablesService,  TypesOfPartyService, UserService, ManagersService, CommentsService } = require("../services/index.service")
+const { RestaurantsService, FoodsService, MainingredientsService, MainingredientDetailsService, TablesService,  TypesOfPartyService, UserService, ManagersService, CommentsService, TicketsService } = require("../services/index.service")
 const {FakeDataVietnamese} = require("../providers/fakedata");
 const {CookieProvider} = require("../providers/cookie")
 const { resolve } = require("path");
@@ -17,31 +17,54 @@ const formatPrice = function (price) {
         : "";
 };
 
-
 class HomeController{
     constructor(){}
-    async index(req,res){
+
+    async index(req, res) {
         let restaurantsService = new RestaurantsService();
         let restaurantList = await restaurantsService.selectAll();
         let foodsService = new FoodsService();
-        let foodList = await foodsService.select({restaurant:restaurantList[0]});
+        let foodList = await foodsService.select({ restaurant: restaurantList[0] });
         let commentsService = new CommentsService();
         let commentsList = await commentsService.selectAll();
+        let username = req.session?.user; // Lấy thông tin username từ session
+        let isAdmin = req.session?.isAdmin; // Lấy thông tin quyền hạn quản trị viên từ session
+        let managerId = req.session?.manager; // Lấy thông tin id của quản lý từ session
         res.render('home/index', {
             restaurantList: restaurantList,
             foodList: foodList,
-            commentsList: commentsList
+            commentsList: commentsList,
+            username: username, // Truyền thông tin username cho view
+            isAdmin: isAdmin, // Truyền thông tin quyền hạn quản trị viên cho view
+            managerId: managerId // Truyền thông tin id của quản lý cho view
         });
     }
+    
     //Ham show login
     async login(req, res){
         res.render('home/login')
 
     }
-
-    async myaccount(req, res){
-        res.render('home/myaccount');
+    async logout(req, res){
+        const cookies = new CookieProvider(req, res);
+         cookies.clearCookie("user");
+         res.redirect('/');
     }
+    async myaccount(req, res) {
+        const cookies = new CookieProvider(req, res);
+        const username = cookies.getCookie("user"); // Lấy tên người dùng từ session
+      
+        // Nếu session không có tên người dùng, chuyển hướng người dùng đến trang đăng nhập
+        if (!username) {
+          return res.redirect('/login');
+        }
+      
+        // Nếu session có tên người dùng, hiển thị thông tin tài khoản của người dùng
+        res.render('home/myaccount',{
+            username:username
+        });
+      }
+      
    
     async cart(req, res){
         const cookies = new CookieProvider();
@@ -147,7 +170,8 @@ class HomeController{
        res.render('home/checkout'); 
     }
 
-    //Ham xu ly
+    
+    
     async loginHandle(req, res){
         let userService = new UserService();
         let managersService = new ManagersService();
@@ -159,12 +183,15 @@ class HomeController{
         let customer = await userService.selectOne(user);
         console.log(customer);
         if(customer){
+            const cookies = new CookieProvider(req, res);
+            cookies.setCookie("user",customer.username,120);
             if(customer.isAdmin){
+                cookies.setCookie("isAdmin","true",120); // lưu trữ thông tin user type
                 res.redirect('/admin')
             }else{
                 let manager = await managersService.selectOne({user:customer});
-                // console.log(manager);
                 if(manager){
+                    cookies.setCookie("manager",manager.restaurant._id,120);
                     res.redirect('/manager/'+manager.restaurant._id)
                 } else {
                     res.redirect('/')
@@ -193,22 +220,73 @@ class HomeController{
     }
     async restaurant(req, res){
         let id = req.params.id;
+
         if(req.params.id && checkHex(req.params.id)){
             res.send('NOT FOUND!!')
             return
         }
+        let tablesService = new TablesService();
+        let typesOfPartyService = new TypesOfPartyService();
         let restaurantsService = new RestaurantsService();
         let restaurant = await restaurantsService.selectById(id);
+        let tables = await tablesService.selectAll();
+        let typesOfParty = await typesOfPartyService.selectAll();
         let foodsService = new FoodsService();
         let foodList = await foodsService.select({restaurant:restaurant});
         res.render('home/restaurants', {
             restaurant: restaurant,
-            foodList: foodList
+            foodList: foodList,
+            tables: tables,
+            typesOfParty: typesOfParty
         });
+    }
+
+    async restaurantReserveHandle(req, res){
+        let data = req.body;
+        let restaurantId = data.id;
+        let customerName = data.customer_name;
+        let tableId = data.table;
+        let quantity = data.quantity;
+        let typeOfPartyId = data.typeOfParty;
+        let receivedDate = data.received_date;
+        let customerPhone = data.customer_phone;
+        let customerAddress = data.customer_address;
+        let cookies = new CookieProvider(req, res);
+        let username = cookies.getCookie("user");
+        if (!username) {
+            return res.redirect('/login');
+          }
+        let userService = new UserService();
+        let user = await userService.selectOne({username: username});
+        let typesOfPartyService = new TypesOfPartyService();
+        let tablesService = new TablesService();
+        let ticketsService = new TicketsService();
+        let typeOfParty = await typesOfPartyService.selectById(typeOfPartyId);
+        let table = await tablesService.selectById(tableId);
+        let restaurantsService = new RestaurantsService();
+        let restaurant = await restaurantsService.selectById(restaurantId);
+        let ticket = {
+            typesofparty : typeOfParty,
+            table: table,
+            user: user,
+            restaurant: restaurant,
+            received_date:  receivedDate,
+            customer_phone: customerPhone,
+            customer_address: customerAddress,
+            quantity:  quantity,
+            customer_name: customerName
+        }
+        await ticketsService.create(ticket);
+        res.redirect('/home/restaurants/'+restaurantId)
+
     }
 
     async detailFood(req, res){
         let id = req.params.id;
+        if(req.params.id && checkHex(req.params.id)){
+            res.send('NOT FOUND!!')
+            return
+        }
         let mainingredientdetailsService = new MainingredientDetailsService();
         let foodsService = new FoodsService();
         let food = await foodsService.selectById(id);

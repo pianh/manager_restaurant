@@ -4,8 +4,8 @@ const {HomeController} = require('../controllers/home.controller');
 var home =new HomeController();
 
 router.route("/test").get(home.test);
-router.route("/restaurants/:id").get(home.restaurant);
-
+router.route("/restaurants/:id").get(home.restaurant).post(home.restaurantReserveHandle);
+router.route("/logout").get(home.logout);
 router.route("/login").get(home.login).post(home.loginHandle);
 router.route("/register").get(home.register).post(home.registerHandle);
 router.route("/food/:id").get(home.detailFood);
@@ -20,6 +20,7 @@ router.route("/clearAllProductInCart").get(home.clearAllCart);
 router.route("/checkOut").get(home.checkOut);
 
 router.route("/myaccount").get(home.myaccount);
+
 
 
 router.route("/").get(home.index);

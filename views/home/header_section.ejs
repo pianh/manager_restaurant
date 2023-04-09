@@ -95,14 +95,33 @@
                             <!-- Header Action Search Button End -->
 
                             <!-- Header My Account Button Start -->
-                            <a href="/login" class="header-action-btn header-action-btn-wishlist">
-                                <i class="icon-user icons"></i>
-                                <% if (typeof username !== 'undefined') { %> 
-                                    <%= username %> 
-                                <% } else { %>
-                                    Đăng nhập
-                                <% } %>
-                            </a>
+                            <div id="accountManage">
+
+                            </div>
+                            <script>
+                                    var xhttp = new XMLHttpRequest();
+                                    xhttp.responseType = "json";
+                                    xhttp.onload = function (e) {
+                                        if (this.readyState == 4 && this.status == 200) {
+                                            let username =this.response.user;
+                                            console.log(username);
+                                            let content = "";
+                                            if(username != undefined){
+                                                content += '<a href="/myaccount" class="header-action-btn header-action-btn-wishlist">';
+                                                content += '    <i class="icon-user icons"></i>';
+                                                content +=     username 
+                                                content += '</a>';
+                                            } else {
+                                                content += '<a href="/login" class="header-action-btn header-action-btn-wishlist">';
+                                                content += '<i class="icon-user icons"></i>Đăng nhập</a>';
+                                            }
+                                            document.getElementById("accountManage").innerHTML = content;
+                                        }
+                                    };
+                                    xhttp.open("GET", "/api/user");
+                                    xhttp.send();
+                                
+                            </script>
                             <!-- Header My Account Button End -->
 
                             <!-- Header Action Button Start -->
@@ -124,7 +143,7 @@
                                             <!-- Single Cart Product Start -->
                                             <div class="single-cart-product">
                                                 <div class="cart-product-thumb">
-                                                    <a href="single-product.html"><img src="images/header/header-cart/1.png" alt="Cart Product"></a>
+                                                    <a href="single-product.html"><img src="/images/header/header-cart/1.png" alt="Cart Product"></a>
                                                 </div>
                                                 <div class="cart-product-content">
                                                     <h3 class="title"><a href="single-product.html">Basic Dog Trainning</a></h3>
@@ -153,7 +172,7 @@
                                             <!-- Single Cart Product Start -->
                                             <div class="single-cart-product">
                                                 <div class="cart-product-thumb">
-                                                    <a href="single-product.html"><img src="images/header/header-cart/2.png" alt="Cart Product"></a>
+                                                    <a href="single-product.html"><img src="/images/header/header-cart/2.png" alt="Cart Product"></a>
                                                 </div>
                                                 <div class="cart-product-content">
                                                     <h3 class="title"><a href="single-product.html">Wait, You Need This</a></h3>

@@ -17,6 +17,14 @@ class  TypesOfPartyService {
             console.log(err);
         }
     }
+    async selectById(typesofparty) {
+        try {
+            const query = TypesOfPartyModel.findById(typesofparty);
+            return await query.exec();
+        } catch (err) {
+            console.log(err);
+        }
+    }
     async selectAll() {
         try {
             const query =  TypesOfPartyModel.find();

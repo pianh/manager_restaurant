@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
 const path = require("path");
 
@@ -21,8 +22,17 @@ app.set('view engine', 'ejs');
 app.use("/datatables", express.static(path.join(__dirname, "node_modules", "datatables", "media")));
 
 app.use(express.static(__dirname + '/public'));
-
+app.use(express.static(__dirname + '/providers/cookie.js'));
 app.use('/', routes); 
+
+
+
+app.use(session({
+  secret: 'my-secret-key', // Khóa bí mật được sử dụng để mã hóa session ID
+  resave: false, // Không lưu lại session nếu không có sự thay đổi
+  saveUninitialized: false // Không lưu lại session nếu không có dữ liệu
+}));
+
 
 async function runServer(){
   try {

@@ -25,6 +25,14 @@ class TicketsService {
             console.log(err);
         }
     }
+    async selectById(id) {
+        try {
+            const query = TicketsModel.findById(id);
+            return await query.exec();
+        } catch (err) {
+            console.log(err);
+        }
+    }
     async create(tickets) {
         try {
             await TicketsModel.create(tickets);

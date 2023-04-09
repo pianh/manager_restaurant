@@ -51,12 +51,12 @@
                                     <a href="#dashboad" class="active" data-bs-toggle="tab"><i class="fa fa-dashboard"></i>
                                         Dashboard</a>
                                     <a href="#orders" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Đơn hàng</a>
-                                    <a href="#orders" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Đặt bàn</a>
-                                    <a href="#download" data-bs-toggle="tab"><i class="fa fa-cloud-download"></i> Download</a>
+                                    <!-- <a href="#orders" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Đặt bàn</a>
+                                    <a href="#download" data-bs-toggle="tab"><i class="fa fa-cloud-download"></i> Download</a> -->
                                     <a href="#payment-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Phương thức thanh toán</a>
                                     <a href="#address-edit" data-bs-toggle="tab"><i class="fa fa-map-marker"></i>Địa chỉ</a>
                                     <a href="#account-info" data-bs-toggle="tab"><i class="fa fa-user"></i>Chi tiết tài khoản</a>
-                                    <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
+                                    <a href="/logout"><i class="fa fa-sign-out"></i> Logout</a>
                                 </div>
                             </div>
                             <!-- My Account Tab Menu End -->
@@ -70,8 +70,12 @@
                                         <div class="myaccount-content">
                                             <h3 class="title">Dashboard</h3>
                                             <div class="welcome">
-                                                <p>Hello, <strong>Alex Aya</strong> (If Not <strong>Aya !</strong><a href="login.html" class="logout"> Logout</a>)</p>
+                                                <p>Hello, <strong><%= username %></strong> (If Not <strong><%= username %>!</strong><a href="/logout" class="logout"> Logout</a>)</p>
                                             </div>
+                                            
+                                            <!-- <div class="welcome">
+                                                <p>Hello, <strong>Alex Aya</strong> (If Not <strong>Aya !</strong><a href="login.html" class="logout"> Logout</a>)</p>
+                                            </div> -->
                                             <p class="mb-0">From your account dashboard. you can easily check & view your recent orders, manage your shipping and billing addresses and edit your password and account details.</p>
                                         </div>
                                     </div>
