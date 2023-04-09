@@ -21,7 +21,7 @@ const OrdersModelSchema = new Schema(
 );
 
 OrdersModelSchema.plugin(require("mongoose-autopopulate"));
-const OrdersModel = mongoose.model("orders",OrdersModelSchema, "orders");
+const OrdersModel = mongoose.model("orders",OrdersModelSchema);
 
 module.exports = {OrdersModel};
 //là bảng có món ăn

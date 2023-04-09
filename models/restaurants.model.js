@@ -18,7 +18,7 @@ const RestaurantsModelSchema = new Schema(
 );
 
 RestaurantsModelSchema.plugin(require("mongoose-autopopulate"));
-const RestaurantsModel = mongoose.model("restaurants", RestaurantsModelSchema, "restaurants");
+const RestaurantsModel = mongoose.model("restaurants", RestaurantsModelSchema);
 
 module.exports = {RestaurantsModel};
 //là bảng có món ăn

@@ -26,6 +26,6 @@ const MainingredientDetailsModelSchema = new Schema(
 );
 MainingredientDetailsModelSchema.plugin(require("mongoose-autopopulate"));
 
-const MainingredientDetailsModel= mongoose.model("mainingredientdetails", MainingredientDetailsModelSchema, "mainingredientdetails");
+const MainingredientDetailsModel= mongoose.model("mainingredientdetails", MainingredientDetailsModelSchema);
 
 module.exports ={MainingredientDetailsModel};

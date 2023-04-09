@@ -17,6 +17,6 @@ const DiscountsModelSchema = new Schema(
     { versionKey: false }
 );
 DiscountsModelSchema.plugin(require("mongoose-autopopulate"));
-const DiscountsModel  = mongoose.model("discounts", DiscountsModelSchema, "discounts");
+const DiscountsModel  = mongoose.model("discounts", DiscountsModelSchema);
 
 module.exports = {DiscountsModel} ;

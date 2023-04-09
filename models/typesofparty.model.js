@@ -10,6 +10,6 @@ const TypesOfPartyModelSchema = new Schema(
 );
 
 TypesOfPartyModelSchema.plugin(require("mongoose-autopopulate"));
-const  TypesOfPartyModel = mongoose.model("typesofparty", TypesOfPartyModelSchema, "typesofparty");
+const  TypesOfPartyModel = mongoose.model("typesofparties", TypesOfPartyModelSchema);
 
 module.exports =  {TypesOfPartyModel};

@@ -17,7 +17,7 @@ router.route("/updateToCart").post(home.updateCart);
 router.route("/removeFromCart").post(home.removeCart); 
 router.route("/clearAllProductInCart").get(home.clearAllCart);
 
-router.route("/checkOut").get(home.checkOut);
+router.route("/checkout").get(home.checkOut);
 
 router.route("/myaccount").get(home.myaccount);
 

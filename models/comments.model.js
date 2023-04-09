@@ -15,6 +15,6 @@ const CommentsModelSchema = new Schema(
     { versionKey: false }
 );
 CommentsModelSchema.plugin(require("mongoose-autopopulate"));
-const CommentsModel = mongoose.model("comments",CommentsModelSchema, "comments");
+const CommentsModel = mongoose.model("comments",CommentsModelSchema);
 
 module.exports = {CommentsModel};

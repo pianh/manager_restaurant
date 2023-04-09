@@ -36,7 +36,7 @@
 
     <!-- My Account Section Start -->
     <div class="section section-margin">
-        <div class="container">
+        <div class="container"  style="max-width: 1500px;">
 
             <div class="row">
                 <div class="col-lg-12">
@@ -51,8 +51,8 @@
                                     <a href="#dashboad" class="active" data-bs-toggle="tab"><i class="fa fa-dashboard"></i>
                                         Dashboard</a>
                                     <a href="#orders" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Đơn hàng</a>
-                                    <!-- <a href="#orders" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Đặt bàn</a>
-                                    <a href="#download" data-bs-toggle="tab"><i class="fa fa-cloud-download"></i> Download</a> -->
+                                    <a href="#table" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Đặt bàn & Đặt tiệc</a>
+                                    <!-- <a href="#download" data-bs-toggle="tab"><i class="fa fa-cloud-download"></i> Download</a> -->
                                     <a href="#payment-method" data-bs-toggle="tab"><i class="fa fa-credit-card"></i> Phương thức thanh toán</a>
                                     <a href="#address-edit" data-bs-toggle="tab"><i class="fa fa-map-marker"></i>Địa chỉ</a>
                                     <a href="#account-info" data-bs-toggle="tab"><i class="fa fa-user"></i>Chi tiết tài khoản</a>
@@ -123,10 +123,50 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="tab-pane fade" id="table" role="tabpanel">
+                                        <div class="myaccount-content">
+                                            <h3 class="title">Table & Party</h3>
+                                            <div class="myaccount-table table-responsive text-center">
+                                                <table class="table table-bordered">
+                                                    <thead class="thead-light">
+                                                        <tr>
+                                                            <th>STT</th>
+                                                            <th>Tên tài khoản đặt</th>
+                                                            <th>Tên người nhận</th>
+                                                            <th>Loại tiệc</th>
+                                                            <th>Loại bàn</th>
+                                                            <th>Tên nhà hàng</th>
+                                                            <th>SDT Khách hàng</th>
+                                                            <th>Địa chỉ Khách hàng</th>
+                                                            <th>Số lượng</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <% tickets?.forEach((element, index)=>{%>
+
+                                                            <tr>
+                                                            <td><%=index+1%></td>
+                                                            <td><%=element.user.username%></td>
+                                                            <td><%=element.customer_name%></td>
+                                                            <td><%=element.typeofparty.name%></td>
+                                                            <td><%=element.table.name%></td>
+                                                            <td><%=element.restaurant.name%></td>
+                                                            <td><%=element.customer_phone%></td>
+                                                            <td><%=element.customer_address%></td>
+                                                            <td><%=element.quantity%></td>
+                                                        </tr>
+                                                        <% }) %>
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <!-- Single Tab Content End -->
 
                                     <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade" id="download" role="tabpanel">
+                                    <!-- <div class="tab-pane fade" id="download" role="tabpanel">
                                         <div class="myaccount-content">
                                             <h3 class="title">Downloads</h3>
                                             <div class="myaccount-table table-responsive text-center">
@@ -156,7 +196,7 @@
                                                 </table>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!-- Single Tab Content End -->
 
                                     <!-- Single Tab Content Start -->

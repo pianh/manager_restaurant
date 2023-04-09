@@ -19,6 +19,6 @@ const  FeedbacksModelSchema = new Schema(
     { versionKey: false }
 );
 FeedbacksModelSchema.plugin(require("mongoose-autopopulate"));
-const  FeedbacksModel  = mongoose.model("feedbacks",  FeedbacksModelSchema, "feedbacks");
+const  FeedbacksModel  = mongoose.model("feedbacks",  FeedbacksModelSchema);
 
 module.exports = {FeedbacksModel} ;

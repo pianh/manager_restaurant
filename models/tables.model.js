@@ -11,6 +11,6 @@ const TablesModelSchema = new Schema(
 
 TablesModelSchema.plugin(require("mongoose-autopopulate"));
 
-const TablesModel = mongoose.model("tables", TablesModelSchema, "tables");
+const TablesModel = mongoose.model("tables", TablesModelSchema);
 
 module.exports = {TablesModel};

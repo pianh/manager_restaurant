@@ -14,6 +14,6 @@ const MainingredientsModelSchema = new Schema(
     { versionKey: false }
 );
 MainingredientsModelSchema.plugin(require("mongoose-autopopulate"));
-const MainingredientsModel = mongoose.model("mainingredients", MainingredientsModelSchema, "mainingredients");
+const MainingredientsModel = mongoose.model("mainingredients", MainingredientsModelSchema);
 
 module.exports = {MainingredientsModel};

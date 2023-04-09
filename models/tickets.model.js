@@ -3,19 +3,19 @@ const Schema = mongoose.Schema;
 
 const  TicketsModelSchema = new Schema (
     {
-        typesofparty:  {
+        typeofparty:  {
             type: mongoose.Schema.Types.ObjectId,
             autopopulate: true, 
-            ref: "typesofparty", 
+            ref: "typesofparties", 
             required: true},  
         table:   {
             type: mongoose.Schema.Types.ObjectId,
             autopopulate: true,
-            ref:"table", required: true},  
+            ref:"tables", required: true},  
         user: {
             type: mongoose.Schema.Types.ObjectId,
             autopopulate: true, 
-            ref:"user", 
+            ref:"users", 
             required: true},  
         restaurant: {
             type: mongoose.Schema.Types.ObjectId,
@@ -41,6 +41,6 @@ const  TicketsModelSchema = new Schema (
 
 TicketsModelSchema.plugin(require("mongoose-autopopulate"));
 
-const  TicketsModel = mongoose.model("tickets", TicketsModelSchema, "tickets");
+const  TicketsModel = mongoose.model("tickets", TicketsModelSchema);
 
 module.exports =  {TicketsModel};

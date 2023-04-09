@@ -28,7 +28,7 @@ const BillsModelSchema = new Schema(
     { versionKey: false }
 );
 BillsModelSchema.plugin(require("mongoose-autopopulate"));
-const BillsModel = mongoose.model("bills", BillsModelSchema, "bills");
+const BillsModel = mongoose.model("bills", BillsModelSchema);
 
 module.exports = {BillsModel};
 // Bên code thì lại không có bảng có món ăn //này là bảng order

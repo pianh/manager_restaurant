@@ -16,7 +16,6 @@ const formatPrice = function (price) {
         ? new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(price)
         : "";
 };
-
 class HomeController{
     constructor(){}
 
@@ -53,15 +52,22 @@ class HomeController{
     async myaccount(req, res) {
         const cookies = new CookieProvider(req, res);
         const username = cookies.getCookie("user"); // Lấy tên người dùng từ session
-      
         // Nếu session không có tên người dùng, chuyển hướng người dùng đến trang đăng nhập
         if (!username) {
           return res.redirect('/login');
         }
+        let userService = new UserService();
+        let user = await userService.selectOne({username: username});
+
+        let ticketsService = new TicketsService();
+        console.log(user);
+        let tickets = await ticketsService.select({user: user});
       
+        console.log(tickets);
         // Nếu session có tên người dùng, hiển thị thông tin tài khoản của người dùng
         res.render('home/myaccount',{
-            username:username
+            username:username,
+            tickets: tickets
         });
       }
       
@@ -167,7 +173,7 @@ class HomeController{
     }
 
     async checkOut(req, res){
-       res.render('home/checkout'); 
+        res.render('home/checkout'); 
     }
 
     
@@ -266,7 +272,7 @@ class HomeController{
         let restaurantsService = new RestaurantsService();
         let restaurant = await restaurantsService.selectById(restaurantId);
         let ticket = {
-            typesofparty : typeOfParty,
+            typeofparty : typeOfParty,
             table: table,
             user: user,
             restaurant: restaurant,

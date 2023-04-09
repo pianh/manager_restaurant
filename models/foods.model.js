@@ -19,6 +19,6 @@ const FoodsModelSchema = new Schema(
     { versionKey: false }
 );
 FoodsModelSchema.plugin(require("mongoose-autopopulate"));
-const FoodsModel = mongoose.model("foods", FoodsModelSchema, "foods");
+const FoodsModel = mongoose.model("foods", FoodsModelSchema);
 
 module.exports = {FoodsModel};

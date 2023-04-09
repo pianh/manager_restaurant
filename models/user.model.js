@@ -13,6 +13,6 @@ const UserModelSchema = new Schema(
 );
 UserModelSchema.plugin(require("mongoose-autopopulate"));
 
-const UserModel = mongoose.model("users", UserModelSchema, "users");
+const UserModel = mongoose.model("users", UserModelSchema); 
 
 module.exports = {UserModel};

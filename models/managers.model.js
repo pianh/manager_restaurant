@@ -20,7 +20,7 @@ const ManagerModelSchema = new Schema(
 );
 
 ManagerModelSchema.plugin(require("mongoose-autopopulate"));
-const ManagerModel = mongoose.model("managers",  ManagerModelSchema, "managers");
+const ManagerModel = mongoose.model("managers",  ManagerModelSchema);
 
 module.exports = {ManagerModel};
 //là bảng có món ăn
