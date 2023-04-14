@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 
 const OrdersModelSchema = new Schema(
     {
-        tickets: { 
+        ticket: { 
             type: mongoose.Schema.Types.ObjectId,
             autopopulate: true, 
             ref: "ticket", 
             required: true },
-        foods: { 
+        food: { 
             type: mongoose.Schema.Types.ObjectId,
             autopopulate: true, 
             ref: "foods", 

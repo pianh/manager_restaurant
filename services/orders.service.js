@@ -4,7 +4,7 @@ class  OrdersService {
     async selectOne(orders) {
         orders.$or = [{status : true},{status : null}];
         try {
-            const query =  OrdersService .findOne(orders);
+            const query =  OrdersModel.findOne(orders);
             return await query.exec();
         } catch (err) {
             console.log(err);
@@ -13,7 +13,7 @@ class  OrdersService {
     async select(orders) {
         orders.$or = [{status : true},{status : null}];
         try {
-            const query =  OrdersService .find(orders);
+            const query =  OrdersModel.find(orders);
             return await query.exec();
         } catch (err) {
             console.log(err);
@@ -22,7 +22,7 @@ class  OrdersService {
     async selectAll() {
         let orders = {$or : [{status : true},{status : null}]};
         try {
-            const query =  OrdersService .find();
+            const query =  OrdersModel.find();
             return await query.exec();
         } catch (err) {
             console.log(err);
@@ -30,7 +30,7 @@ class  OrdersService {
     }
     async create(orders) {
         try {
-            await OrdersService.create(orders);
+            await OrdersModel.create(orders);
             return;
         } catch (err) {
             console.log(err);
@@ -38,7 +38,7 @@ class  OrdersService {
     }
     async updateOneById(ordersId,orders){
         try {
-            const query =  OrdersService.updateOne({ '_id': new ObjectId(ordersId), $or : [{status : true},{status : null}] }, orders);
+            const query =  OrdersModel.updateOne({ '_id': new ObjectId(ordersId), $or : [{status : true},{status : null}] }, orders);
             await query.exec();
             return ;
         } catch (err) {
@@ -49,7 +49,7 @@ class  OrdersService {
     async updateOne(filter,orders){
         filter.$or = [{status : true},{status : null}];
         try {
-            const query =  OrdersService.updateOne(filter, orders);s
+            const query =  OrdersModel.updateOne(filter, orders);s
             await query.exec();
             return ;
         } catch (err) {
@@ -59,7 +59,7 @@ class  OrdersService {
     async update(filter,orders){
         filter.$or = [{status : true},{status : null}];
         try {
-            const query =  OrdersService.updateMany(filter, orders);
+            const query =  OrdersModel.updateMany(filter, orders);
             await query.exec();
             return ;
         } catch (err) {
@@ -78,7 +78,7 @@ class  OrdersService {
     async deleteOne(filter){
         filter.$or = [{status : true},{status : null}];
         try {
-            const query =  OrdersService.deleteOne(filter, orders);
+            const query =  OrdersModel.deleteOne(filter, orders);
             await query.exec();
             return ;
         } catch (err) {
@@ -89,7 +89,7 @@ class  OrdersService {
     async delete(filter){
         filter.$or = [{status : true},{status : null}];
         try {
-            const query =  OrdersService.deleteMany(filter, orders);
+            const query =  OrdersModel.deleteMany(filter, orders);
             await query.exec();
             return ;
         } catch (err) {

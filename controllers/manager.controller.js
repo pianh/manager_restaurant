@@ -39,7 +39,6 @@ class ManagermentController{
         let restaurantId = req.params.restaurantId;
         let restaurantsService = new RestaurantsService();
         let restaurant = await restaurantsService.selectById(restaurantId);
-        console.log(restaurant);
         // if(!restaurant){
         //     res.send("NOT FOUND");
         //    //Có thể render views kiểu err 404 thay vì chỉ send chuỗi về cho user

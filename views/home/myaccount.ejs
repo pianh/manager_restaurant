@@ -73,9 +73,6 @@
                                                 <p>Hello, <strong><%= username %></strong> (If Not <strong><%= username %>!</strong><a href="/logout" class="logout"> Logout</a>)</p>
                                             </div>
                                             
-                                            <!-- <div class="welcome">
-                                                <p>Hello, <strong>Alex Aya</strong> (If Not <strong>Aya !</strong><a href="login.html" class="logout"> Logout</a>)</p>
-                                            </div> -->
                                             <p class="mb-0">From your account dashboard. you can easily check & view your recent orders, manage your shipping and billing addresses and edit your password and account details.</p>
                                         </div>
                                     </div>
@@ -89,35 +86,26 @@
                                                 <table class="table table-bordered">
                                                     <thead class="thead-light">
                                                         <tr>
-                                                            <th>Order</th>
-                                                            <th>Date</th>
-                                                            <th>Status</th>
-                                                            <th>Total</th>
-                                                            <th>Action</th>
+                                                            <th>STT</th>
+                                                            <th>Ngày Đặt</th>
+                                                            <th>Trạng thái</th>
+                                                            <th>Tổng giá</th>
+                                                            <th>Chi tiết</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>Aug 22, 2018</td>
-                                                            <td>Pending</td>
-                                                            <td>$3000</td>
-                                                            <td><a href="cart.html" class="btn btn btn-dark btn-hover-primary btn-sm rounded-0">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>July 22, 2018</td>
-                                                            <td>Approved</td>
-                                                            <td>$200</td>
-                                                            <td><a href="cart.html" class="btn btn btn-dark btn-hover-primary btn-sm rounded-0">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>June 12, 2019</td>
-                                                            <td>On Hold</td>
-                                                            <td>$990</td>
-                                                            <td><a href="cart.html" class="btn btn btn-dark btn-hover-primary btn-sm rounded-0">View</a></td>
-                                                        </tr>
+                                                        <% orders.forEach( (element, index)=>{ %>
+                                                            <tr>
+                                                                <td><%= index+1 %></td>
+                                                                <td><%= new Date(element.received_date).toLocaleDateString('vi-VN') +
+                                                                " "+new Date(element.received_date).getHours()+":"+
+                                                                new Date(element.received_date).getMinutes()  %>
+                                                                </td>
+                                                                <td><%= element.manager == null ? "Chờ duyệt" : "Đã duyệt" %></td>
+                                                                <td><%= element.total %></td>
+                                                                <td><a href="#" class="btn btn btn-dark btn-hover-primary btn-sm rounded-0">View</a></td>
+                                                            </tr>
+                                                            <% }) %>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -143,19 +131,19 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <% tickets?.forEach((element, index)=>{%>
+                                                        <% reserveTables.forEach((element, index)=>{ %>
 
                                                             <tr>
-                                                            <td><%=index+1%></td>
-                                                            <td><%=element.user.username%></td>
-                                                            <td><%=element.customer_name%></td>
-                                                            <td><%=element.typeofparty.name%></td>
-                                                            <td><%=element.table.name%></td>
-                                                            <td><%=element.restaurant.name%></td>
-                                                            <td><%=element.customer_phone%></td>
-                                                            <td><%=element.customer_address%></td>
-                                                            <td><%=element.quantity%></td>
-                                                        </tr>
+                                                                <td><%=index+1%></td>
+                                                                <td><%=element.user.username%></td>
+                                                                <td><%=element.customer_name%></td>
+                                                                <td><%=element.typeofparty?.name%></td>
+                                                                <td><%=element.table?.name%></td>
+                                                                <td><%=element.restaurant?.name%></td>
+                                                                <td><%=element.customer_phone%></td>
+                                                                <td><%=element.customer_address%></td>
+                                                                <td><%=element.quantity%></td>
+                                                            </tr>
                                                         <% }) %>
                                                         
                                                     </tbody>
@@ -211,13 +199,21 @@
                                     <!-- Single Tab Content Start -->
                                     <div class="tab-pane fade" id="address-edit" role="tabpanel">
                                         <div class="myaccount-content">
-                                            <h3 class="title">Billing Address</h3>
-                                            <address>
-                                                <p><strong>Alex Aya</strong></p>
-                                                <p>1234 Market ##, Suite 900 <br>Lorem Ipsum, ## 12345</p>
-                                                <p>Mobile: (123) 123-456789</p>
-                                            </address>
-                                            <a href="#" class="btn btn btn-dark btn-hover-primary rounded-0"><i class="fa fa-edit m-r-10"></i>Edit Address</a>
+                                            <h3 class="title">Địa chỉ đã dùng</h3>
+                                            <div class="d-flex">
+                                                <% addresses.forEach((item,index)=> { %>
+                                                    <div class="card mx-2">
+                                                        <div class="card-header">Địa chỉ <%= index +1 %></div>
+                                                        <div class="card-body">
+                                                            <address>
+                                                                <p><%= item.address %></p>
+                                                                <p>Mobile: <%= item.phone %></p>
+                                                            </address>
+                                                        </div>
+                                                    </div>
+                                                <% }) %>
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                     <!-- Single Tab Content End -->
@@ -227,48 +223,56 @@
                                         <div class="myaccount-content">
                                             <h3 class="title">Chi tiết tài khoản</h3>
                                             <div class="account-details-form">
-                                                <form action="#">
+                                                <form action="" method="post" >
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="single-input-item m-b-15">
                                                                 <label for="first-name" class="required m-b-10">Tên</label>
-                                                                <input type="text" id="first-name" placeholder="Tên" />
+                                                                <input type="text" id="first-name" name="name" placeholder="Tên"
+                                                                value="<%= user.name %>" />
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <div class="single-input-item m-b-15">
                                                                 <label for="last-name" class="required m-b-10">Tên tài khoản</label>
-                                                                <input type="text" id="last-name" placeholder="Tên tài khoản" />
+                                                                <input type="text" id="last-name" name="username" readonly hidden placeholder="Tên tài khoản"
+                                                                value="<%= user.username %>" /><strong><%= user.username %></strong>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="single-input-item m-b-15">
                                                         <label for="email" class="required m-b-5">Địa chỉ Email</label>
-                                                        <input type="email" id="email" placeholder="Địa chỉ Email" />
+                                                        <input type="email" id="email" name="email" placeholder="Địa chỉ Email"
+                                                        value="<%= user.email %>" />
                                                     </div>
+                                                    
+                                                    <div class="single-input-item single-item-button m-t-30">
+                                                        <button type="submit" name="btnSubmit" value="changeInfomation"  class="btn btn btn-primary btn-hover-dark rounded-0">Lưu thay đổi</button>
+                                                    </div>
+
                                                     <fieldset>
                                                         <legend>Thay đổi mật khẩu</legend>
                                                         <div class="single-input-item m-b-15">
                                                             <label for="current-pwd" class="required m-b-10">Mật khẩu hiện tại</label>
-                                                            <input type="password" id="current-pwd" placeholder="Mật khẩu hiện tại" />
+                                                            <input type="password" id="current-pwd" name="currentPassword" placeholder="Mật khẩu hiện tại" />
                                                         </div>
                                                         <div class="row m-b-n15">
                                                             <div class="col-lg-6">
-                                                                <div class="single-input-item m-b-15">
+                                                                <div class="single-input-item m-b-15"> 
                                                                     <label for="new-pwd" class="required m-b-10">Mật khẩu mới</label>
-                                                                    <input type="password" id="new-pwd" placeholder="Mật khẩu mới" />
+                                                                    <input type="password" id="new-pwd" name="newPassword" placeholder="Mật khẩu mới" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
                                                                 <div class="single-input-item m-b-15">
                                                                     <label for="confirm-pwd" class="required m-b-10">Nhập lại mật khẩu</label>
-                                                                    <input type="password" id="confirm-pwd" placeholder="Nhập lại mật khẩu" />
+                                                                    <input type="password" id="pre-pwd" name ="prePassword" placeholder="Nhập lại mật khẩu" />
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </fieldset>
                                                     <div class="single-input-item single-item-button m-t-30">
-                                                        <button class="btn btn btn-primary btn-hover-dark rounded-0">Lưu thay đổi</button>
+                                                        <button type="submit" name="btnSubmit" value="changePassword" class="btn btn btn-primary btn-hover-dark rounded-0">Đổi mật khẩu</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -468,10 +472,6 @@
                     </form>
                 </div>
                 <!-- Mobile Menu Search Box End -->
-
-                <!-- Mobile Menu Start -->
-               
-                <!-- Mobile Menu End -->
 
                 <!-- Language, Currency & Link Start -->
                 <div class="offcanvas-lag-curr m-b-30">

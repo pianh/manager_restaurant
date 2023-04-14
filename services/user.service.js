@@ -35,7 +35,7 @@ class UserService {
     }
     async updateOneById(userId,user){
         try {
-            const query = UserModel.updateOne({ '_id': new ObjectId(userId), }, user);s
+            const query = UserModel.updateOne({ '_id': userId }, user);
             await query.exec();
             return ;
         } catch (err) {

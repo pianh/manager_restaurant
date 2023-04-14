@@ -1,4 +1,4 @@
-const { RestaurantsService, FoodsService, MainingredientsService, MainingredientDetailsService, TablesService,  TypesOfPartyService, UserService, ManagersService, CommentsService, TicketsService } = require("../services/index.service")
+const { RestaurantsService, FoodsService, MainingredientsService, MainingredientDetailsService, TablesService,  TypesOfPartyService, UserService, ManagersService, CommentsService, TicketsService, OrdersService } = require("../services/index.service")
 const {FakeDataVietnamese} = require("../providers/fakedata");
 const {CookieProvider} = require("../providers/cookie")
 const { resolve } = require("path");
@@ -15,7 +15,7 @@ const formatPrice = function (price) {
     return price.length > 0
         ? new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(price)
         : "";
-};
+}
 class HomeController{
     constructor(){}
 
@@ -50,6 +50,11 @@ class HomeController{
          res.redirect('/');
     }
     async myaccount(req, res) {
+        function removeDuplicates(datas) {
+            let jsonObject = datas.map(item => JSON.stringify(item));
+            let uniqueSet = new Set(jsonObject);
+            return Array.from(uniqueSet).map(item => JSON.parse(item));
+        }
         const cookies = new CookieProvider(req, res);
         const username = cookies.getCookie("user"); // Lấy tên người dùng từ session
         // Nếu session không có tên người dùng, chuyển hướng người dùng đến trang đăng nhập
@@ -60,17 +65,61 @@ class HomeController{
         let user = await userService.selectOne({username: username});
 
         let ticketsService = new TicketsService();
-        console.log(user);
-        let tickets = await ticketsService.select({user: user});
-      
-        console.log(tickets);
-        // Nếu session có tên người dùng, hiển thị thông tin tài khoản của người dùng
+        let reserveTables = await ticketsService.select({user: user,table: {$ne:null}});
+        let orders = await ticketsService.select({user: user,table: null});
+        let tmps = await ticketsService.select({user: user});
+        let addresses = tmps.map(x => {return {
+            address: x.customer_address,
+            phone: x.customer_phone
+        }});
+        addresses = removeDuplicates(addresses);
         res.render('home/myaccount',{
             username:username,
-            tickets: tickets
+            reserveTables: reserveTables,
+            orders: orders,
+            addresses: addresses,
+            user: user
         });
       }
-      
+    async changeInfomation(req, res) {
+        let data = req.body;
+        if(data.btnSubmit == "changePassword") {
+            let username = data.username;
+            let oldPassword = data.currentPassword;
+            let newPassword = data.newPassword;
+            let reNewPassword = data.prePassword;
+            let userService = new UserService();
+            let user = await userService.selectOne({username: username,password:oldPassword});
+            if(user != null){
+                if(newPassword == reNewPassword){
+                    await userService.updateOneById(user._id,{password:newPassword});
+                }
+            }
+        } else if(data.btnSubmit == "changeInfomation") {
+            let username = data.username;
+            let email = data.email;
+            let name = data.name;
+            let updateData = {
+                email:email,
+                name:name
+            };
+            if(email == ""){
+                delete updateData.email;
+            }
+            if(name == ""){
+                delete updateData.name;
+            }
+            if (updateData) {
+                let userService = new UserService();
+                let user = await userService.selectOne({username: username});
+                if(user != null){
+                    await userService.updateOneById(user._id,updateData);
+                }
+            }
+        } 
+
+        res.redirect('/myaccount');
+      }
    
     async cart(req, res){
         const cookies = new CookieProvider();
@@ -173,6 +222,83 @@ class HomeController{
     }
 
     async checkOut(req, res){
+        const cookies = new CookieProvider();
+        cookies.setParamater(req, res);
+        let bString = cookies.getCookie("carts");
+        let b = [];
+        if(bString != undefined){
+            b = JSON.parse(bString);
+        }
+        let carts = [];
+        let foodsService = new FoodsService();
+        for(let item of b){
+            let itemCart = {
+                food: await foodsService.selectById(item.food),
+                quantity: item.quantity
+            }
+            if(itemCart.food != null){
+                carts.push(itemCart);
+    
+            }
+        }
+        res.render('home/checkout', {carts:carts, formatPrice:formatPrice}); 
+    }
+    
+    async checkOutHandler(req, res){
+        let cookies = new CookieProvider(req, res);
+        let ticketsService = new TicketsService();
+        let userService = new UserService();
+        let foodsService = new FoodsService();
+        let ordersService = new OrdersService();
+        let data = req.body;
+        let customerName = data.customer_name;
+        let receivedDate = new Date();
+        let customerPhone = data.customer_phone;
+        let customerAddress = data.customer_address;
+        let username = cookies.getCookie("user");
+        if (!username) {
+            return res.redirect('/login');
+        }
+        let bString = cookies.getCookie("carts");
+        let b = [];
+        if(bString != undefined){
+            b = JSON.parse(bString);
+        }
+        let carts = [];
+        for(let item of b){
+            let itemCart = {
+                food: await foodsService.selectById(item.food),
+                quantity: item.quantity
+            }
+            if(itemCart.food != null){
+                carts.push(itemCart);
+    
+            }
+        }
+        let user = await userService.selectOne({username: username});
+        let ticket = {
+            user: user,
+            received_date:  receivedDate,
+            customer_phone: customerPhone,
+            customer_address: customerAddress,
+            customer_name: customerName
+        }
+        let result = await ticketsService.create(ticket);
+        let orders = [];
+        let total = 0;
+        for(let item of carts){
+            let order = {
+                ticket: result,
+                food:item.food,
+                quantity:item.quantity,
+                price:item.food.price
+            }
+            total += (item.food.price * item.quantity);
+            orders.push(order);
+        }
+        await ticketsService.updateOneById(result._id,{total:total});
+        await ordersService.create(orders);
+        
         res.render('home/checkout'); 
     }
 
@@ -187,7 +313,6 @@ class HomeController{
 
         }
         let customer = await userService.selectOne(user);
-        console.log(customer);
         if(customer){
             const cookies = new CookieProvider(req, res);
             cookies.setCookie("user",customer.username,120);
@@ -286,6 +411,7 @@ class HomeController{
         res.redirect('/home/restaurants/'+restaurantId)
 
     }
+    
 
     async detailFood(req, res){
         let id = req.params.id;

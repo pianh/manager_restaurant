@@ -35,15 +35,14 @@ class TicketsService {
     }
     async create(tickets) {
         try {
-            await TicketsModel.create(tickets);
-            return;
+            return await TicketsModel.create(tickets);
         } catch (err) {
             console.log(err);
         }
     }
     async updateOneById(ticketsId,tickets){
         try {
-            const query = TicketsModel.updateOne({ '_id': new ObjectId(ticketsId), }, tickets);
+            const query = TicketsModel.updateOne({ _id: ticketsId }, tickets);
             await query.exec();
             return ;
         } catch (err) {

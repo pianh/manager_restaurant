@@ -12,6 +12,10 @@ router.get("/api/user",(req,res)=>{
     const cookies = new CookieProvider(req,res);
     res.json({user:cookies.getCookie('user')})
 })
+router.get("/api/cart",(req,res)=>{
+    const cookies = new CookieProvider(req,res);
+    res.json({cart:cookies.getCookie('carts')})
+})
 router.use('/admin', adminRoute);
 router.use('/manager', managerRoute);
 router.use('/home', homeRoute);

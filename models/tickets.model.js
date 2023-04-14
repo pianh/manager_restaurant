@@ -6,12 +6,13 @@ const  TicketsModelSchema = new Schema (
         typeofparty:  {
             type: mongoose.Schema.Types.ObjectId,
             autopopulate: true, 
-            ref: "typesofparties", 
-            required: true},  
+            ref: "typesofparties"
+        },  
         table:   {
             type: mongoose.Schema.Types.ObjectId,
             autopopulate: true,
-            ref:"tables", required: true},  
+            ref:"tables"
+        },  
         user: {
             type: mongoose.Schema.Types.ObjectId,
             autopopulate: true, 
@@ -20,8 +21,8 @@ const  TicketsModelSchema = new Schema (
         restaurant: {
             type: mongoose.Schema.Types.ObjectId,
             autopopulate: true, 
-            ref: "restaurants", 
-            required: true},  
+            ref: "restaurants"
+        },  
         manager: {
             type: mongoose.Schema.Types.ObjectId,
             autopopulate: true, 
@@ -33,6 +34,7 @@ const  TicketsModelSchema = new Schema (
         customer_phone: { type: String, trim: true, required: true },
         customer_address: { type: String, trim: true, required: true },
         quantity: { type: Number, default: 0}, //đặt đồ ăn về thì chỗ ngồi đó 0
+        total: { type: Number}, //đặt đồ ăn về thì chỗ ngồi đó 0
     
     },  
     
