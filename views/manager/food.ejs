@@ -334,7 +334,7 @@
 											<td ><img style = "height: 50px; width: 50px; object-fit: cover;" src="<%=elem.image_url[0]%>"/></td>
 											<td><%=elem.name%></td>
 											<td><%=elem.price%></td>
-											<td><button type="button" class="btn btn-primary btn-sm radius-30 px-4">View Details</button></td>
+											<td><a href="/manager/<%= elem.restaurant._id%>/edit-food/<%=elem._id%>"><button type="button" class="btn btn-primary btn-sm radius-30 px-4">View Details</button></a></td>
 											<td>
 												<div class="d-flex order-actions">
 													
@@ -459,6 +459,10 @@
 			</div>
 		</div>
 	</div>
+	<% if(typeof(hasAction) != "undefined" && hasAction){  %>
+		<%- include("./addFood.ejs") %>
+		<% } %>
+	
 	<!--end switcher-->
 	<!-- Bootstrap JS -->
 	<script src="/assets/js/bootstrap.bundle.min.js"></script>

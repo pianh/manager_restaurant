@@ -435,9 +435,16 @@ class HomeController{
 
 
     async test(req,res){
-        let fakedata = new FakeDataVietnamese();
         let restaurantsService = new RestaurantsService();
-        
+        let mainingredientsService = new MainingredientsService();
+        let a =  await restaurantsService.selectById("63eed27b029d15940f1ad439");
+        let bs = await restaurantsService.select({_id:{ $ne :a} });
+        let cs = await  mainingredientsService.select({restaurant:a});
+        for(let element of bs){
+            for(let element1 of cs){
+                await mainingredientsService.create({name:element1.name,restaurant:element});
+            }
+        }
         res.json("a")
 
 

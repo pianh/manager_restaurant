@@ -75,19 +75,49 @@ class ManagermentController{
 
     //Ham show trang them mon an
     async managermentAddFood(req, res){
-        res.render('manager/food',{
+        let restaurantId = req.params.restaurantId;
+        let restaurantsService = new RestaurantsService();
+        let mainingredientsService = new MainingredientsService();
+        let restaurant = await restaurantsService.selectById(restaurantId);
+        let mainIngredients = await mainingredientsService.select({restaurant:restaurant});
+        console.log(restaurant)
+        let foodsService = new FoodsService();
+        let foods = await foodsService.select({
+            restaurant : restaurant
+        });
+        res.render('manager/food', {
+            foods:foods,
             id: req.params.restaurantId,
+            hasAction: true,
+            mainIngredients:mainIngredients,
+            headerAction:"Thêm món ăn"
         }); 
     }
 
     //Ham show sua mon an
     async managermentEditFood(req, res){
-        let id = req.params.id;
+        let restaurantId = req.params.restaurantId;
+        let foodId = req.params.foodId;
         let foodsService = new FoodsService();
-        let food = await foodsService.selectById(id);
-        res.render('manager/edit_Food',{
-            food : food
+        let restaurantsService = new RestaurantsService();
+        let mainingredientsService = new MainingredientsService();
+        let mainingredientDetailsService = new  MainingredientDetailsService();
+        let restaurant = await restaurantsService.selectById(restaurantId);
+        let mainIngredients = await mainingredientsService.select({restaurant:restaurant});
+        let  food = await foodsService.selectById(foodId);
+        let  foodDetail  = await mainingredientDetailsService.selectOne({food : food})
+        let foods = await foodsService.select({
+            restaurant : restaurant
         });
+        console.log(foodDetail);
+        res.render('manager/food', {
+            foods:foods,
+            id: req.params.restaurantId,
+            hasAction: true,
+            mainIngredients:mainIngredients,
+            foodDetail: foodDetail,
+            headerAction:"Cập nhật món ăn"
+        }); 
     }
     
 
