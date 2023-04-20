@@ -50,9 +50,6 @@ class ManagermentController{
                 restaurant : restaurant
             });
             res.render('manager/food', {foods:foods,id: req.params.restaurantId}); 
-        // }
-       
-        
     }
 
     // Ham show trang don hang
