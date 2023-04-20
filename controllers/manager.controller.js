@@ -72,22 +72,7 @@ class ManagermentController{
 
     //Ham show trang them mon an
     async managermentAddFood(req, res){
-<<<<<<< HEAD
-        res.render('manager/addFood',{
-=======
-        let restaurantId = req.params.restaurantId;
-        let restaurantsService = new RestaurantsService();
-        let mainingredientsService = new MainingredientsService();
-        let restaurant = await restaurantsService.selectById(restaurantId);
-        let mainIngredients = await mainingredientsService.select({restaurant:restaurant});
-        console.log(restaurant)
-        let foodsService = new FoodsService();
-        let foods = await foodsService.select({
-            restaurant : restaurant
-        });
-        res.render('manager/food', {
-            foods:foods,
->>>>>>> 03d5e3fd65c44d6ffa03a122a541b0b351df4ce0
+        res.render('manager/food',{
             id: req.params.restaurantId,
             hasAction: true,
             mainIngredients:mainIngredients,
