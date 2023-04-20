@@ -23,7 +23,7 @@
 	<link rel="stylesheet" href="/assets/css/semi-dark.css" />
 	<link rel="stylesheet" href="/assets/css/header-colors.css" />
 	<link rel="stylesheet" href="/datatables/css/jquery.dataTables.css">
-	<title>Synadmin – Bootstrap5 Admin Template</title>
+	<title>Manager</title>
 </head><body>
 	<!--wrapper-->
 	<div class="wrapper">
@@ -338,7 +338,7 @@
 											<td ><img style = "height: 50px; width: 50px; object-fit: cover;" src="<%=elem.image_url[0]%>"/></td>
 											<td><%=elem.name%></td>
 											<td><%=elem.price%></td>
-											<td><button type="button" class="btn btn-primary btn-sm radius-30 px-4">View Details</button></td>
+											<td><a href="/manager/<%= elem.restaurant._id%>/edit-food/<%=elem._id%>"><button type="button" class="btn btn-primary btn-sm radius-30 px-4">View Details</button></a></td>
 											<td>
 												<!-- <a href="javascript:;" class="ms-3"><i class='bx bxs-trash'></i></a> -->
 												<div class="d-flex order-actions" style="min-width: 30px;">
@@ -465,6 +465,10 @@
 			</div>
 		</div>
 	</div>
+	<% if(typeof(hasAction) != "undefined" && hasAction){  %>
+		<%- include("./addFood.ejs") %>
+		<% } %>
+	
 	<!--end switcher-->
 	<!-- Bootstrap JS -->
 	<script src="/assets/js/bootstrap.bundle.min.js"></script>

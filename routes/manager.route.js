@@ -9,11 +9,11 @@ var manager = new ManagermentController();
 router.route("/:restaurantId").get(manager.managermentIndex);
 
 //Trang don hang
-router.route("/order/:restaurantId").get(manager.managermentOrder);
+router.route("/:restaurantId/order").get(manager.managermentOrder);
 
 //Trang mon an
 
-router.route("/food/:restaurantId").get(manager.managermentFood);
+router.route("/:restaurantId/food").get(manager.managermentFood);
 
 
 router.route("/food/edit/:id").get(manager.managermentEditFood).post(upload.array("images",4),manager.editFoodHandlle);
@@ -21,10 +21,10 @@ router.route("/food/edit/:id").get(manager.managermentEditFood).post(upload.arra
 router.route("/food/remove/:id").get(manager.removeFoodHandle);
 
 //Trang them mon an
-router.route("/addFood/:restaurantId").get(manager.managermentAddFood);
+router.route("/:restaurantId/new-food").get(manager.managermentAddFood);
 
 //Trang chinh sua mon an
-router.route("/editFood/:restaurantId").get(manager.managermentEditFood);
+router.route("/:restaurantId/edit-food/:foodId").get(manager.managermentEditFood);
 
 //Ham show chi tiet thanh phan
 router.route("/ingredient/:restaurantId").get(manager.managermentIngredientList);

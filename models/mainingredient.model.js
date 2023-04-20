@@ -8,7 +8,7 @@ const MainingredientsModelSchema = new Schema(
             autopopulate: true, 
             ref: "restaurants", 
             required: true},  
-        name: { type: String, trim: true,unique:true, required: true },
+        name: { type: String, trim: true, required: true },
         status: { type: Boolean, default: true },
     },
     { versionKey: false }
@@ -16,4 +16,4 @@ const MainingredientsModelSchema = new Schema(
 MainingredientsModelSchema.plugin(require("mongoose-autopopulate"));
 const MainingredientsModel = mongoose.model("mainingredients", MainingredientsModelSchema);
 
-module.exports = {MainingredientsModel};
+module.exports = {MainingredientsModel}; 

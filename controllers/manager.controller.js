@@ -39,7 +39,6 @@ class ManagermentController{
         let restaurantId = req.params.restaurantId;
         let restaurantsService = new RestaurantsService();
         let restaurant = await restaurantsService.selectById(restaurantId);
-        console.log(restaurant);
         // if(!restaurant){
         //     res.send("NOT FOUND");
         //    //Có thể render views kiểu err 404 thay vì chỉ send chuỗi về cho user
@@ -51,9 +50,6 @@ class ManagermentController{
                 restaurant : restaurant
             });
             res.render('manager/food', {foods:foods,id: req.params.restaurantId}); 
-        // }
-       
-        
     }
 
     // Ham show trang don hang
@@ -76,19 +72,53 @@ class ManagermentController{
 
     //Ham show trang them mon an
     async managermentAddFood(req, res){
+<<<<<<< HEAD
         res.render('manager/addFood',{
+=======
+        let restaurantId = req.params.restaurantId;
+        let restaurantsService = new RestaurantsService();
+        let mainingredientsService = new MainingredientsService();
+        let restaurant = await restaurantsService.selectById(restaurantId);
+        let mainIngredients = await mainingredientsService.select({restaurant:restaurant});
+        console.log(restaurant)
+        let foodsService = new FoodsService();
+        let foods = await foodsService.select({
+            restaurant : restaurant
+        });
+        res.render('manager/food', {
+            foods:foods,
+>>>>>>> 03d5e3fd65c44d6ffa03a122a541b0b351df4ce0
             id: req.params.restaurantId,
+            hasAction: true,
+            mainIngredients:mainIngredients,
+            headerAction:"Thêm món ăn"
         }); 
     }
 
     //Ham show sua mon an
     async managermentEditFood(req, res){
-        let id = req.params.id;
+        let restaurantId = req.params.restaurantId;
+        let foodId = req.params.foodId;
         let foodsService = new FoodsService();
-        let food = await foodsService.selectById(id);
-        res.render('manager/edit_Food',{
-            food : food
+        let restaurantsService = new RestaurantsService();
+        let mainingredientsService = new MainingredientsService();
+        let mainingredientDetailsService = new  MainingredientDetailsService();
+        let restaurant = await restaurantsService.selectById(restaurantId);
+        let mainIngredients = await mainingredientsService.select({restaurant:restaurant});
+        let  food = await foodsService.selectById(foodId);
+        let  foodDetail  = await mainingredientDetailsService.selectOne({food : food})
+        let foods = await foodsService.select({
+            restaurant : restaurant
         });
+        console.log(foodDetail);
+        res.render('manager/food', {
+            foods:foods,
+            id: req.params.restaurantId,
+            hasAction: true,
+            mainIngredients:mainIngredients,
+            foodDetail: foodDetail,
+            headerAction:"Cập nhật món ăn"
+        }); 
     }
     
 
