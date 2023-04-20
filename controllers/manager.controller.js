@@ -76,7 +76,7 @@ class ManagermentController{
 
     //Ham show trang them mon an
     async managermentAddFood(req, res){
-        res.render('manager/food',{
+        res.render('manager/addFood',{
             id: req.params.restaurantId,
         }); 
     }
